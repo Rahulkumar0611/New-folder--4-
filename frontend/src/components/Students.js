@@ -42,8 +42,8 @@ const Students = () => {
 
 
   return (
-    <div id='header1'>
-      <h1 className="title">Student Details</h1>
+    <div id='header131'>
+      <h1 className="title988">Student Details</h1>
       <input
         type="text"
         placeholder="Search Student By ID, Name, Class, Phone..."
@@ -89,7 +89,7 @@ const Students = () => {
                 <td>{student.Class}</td>
                 <td>{student.Phone}</td>
                 <td>
-                  <button onClick={() => handleViewClick(student)} className="view-button">
+                  <button onClick={() => handleViewClick(student)} className="view-button56">
                     View
                   </button>
                 </td>

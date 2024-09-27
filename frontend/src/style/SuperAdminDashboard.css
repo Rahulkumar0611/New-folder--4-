@@ -1,0 +1,38 @@
+.navbar {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a slight shadow for better separation */
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .navLink {
+    color: aliceblue;
+    font-size: 1rem;
+    margin-right: 15px; /* Add some spacing between nav links */
+  }
+  
+  .navLink:hover {
+    color: rgb(201, 117, 117); /* Change color on hover to give better feedback */
+  }
+  .navbar{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(33, 5, 160);
+  }
+  
+  .navbar-toggler button{
+    background-color: aliceblue;
+  }
+  .navbarBrand{
+    background-color: rgb(33, 5, 160);
+    border: none;
+  }
+  .navbarBrand:hover{
+    color: rgb(201, 117, 117);
+  }
+  

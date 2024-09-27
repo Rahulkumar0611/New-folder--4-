@@ -44,9 +44,9 @@ const AddStudent = () => {
 };
 
   return (
-    <div className="container">
+    <div className="container131">
       <form onSubmit={addStudent} className="form">
-        <h1 className="title">Student Registration Form</h1>
+        <h1 className="title737">Student Registration Form</h1>
 
         <div className="group">
           <label htmlFor="id" className="label">ID</label>
