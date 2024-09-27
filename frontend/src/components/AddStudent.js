@@ -30,7 +30,7 @@ const AddStudent = () => {
       // Check if the response contains the student data
       if (res.data && res.data.student) {
         // Store the student data in localStorage
-        window.localStorage.setItem("student", JSON.stringify(res.data.student));
+       // window.localStorage.setItem("student", JSON.stringify(res.data.student));
         alert("Student added successfully and data saved to localStorage.");
       } else {
         console.error("Invalid response structure");
