@@ -1,6 +1,8 @@
 /* General Page Layout */
 #header1 {
-  margin-top: 20px;
+  height: auto;
+  background-color: #0056b3;
+  margin-top: 70rem;
   text-align: center;
 }
 
