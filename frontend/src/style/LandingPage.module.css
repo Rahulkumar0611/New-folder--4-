@@ -1,0 +1,155 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.formControl {
+  padding-right: 2.5rem; /* Adjust for the button inside the input */
+}
+
+.eyeButton {
+  font-size: 3px;
+  position: absolute;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #484d52;
+  font-size: 1.1rem;
+  padding: 0;
+}
+
+.eyeButton:hover {
+  background-color: white;
+ color: rgb(90, 75, 75); /* Darker blue on hover */
+}
+
+
+h6{
+  font-weight: 400;
+  font-size: 14px;
+  text-align: left;
+  color: rgb(179, 167, 167);
+  font-family:Arial, Helvetica, sans-serif;
+}
+.AdminLogin h1{
+  text-align: left;
+}
+/* Center the form container */
+.AdminLogin {
+  height: 550px;
+  padding: 35px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 410px;
+  text-align: center;
+}
+
+/* Heading styling */
+.heading {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 20px;
+  position: relative;
+}
+.optionalue1{
+  border: 1px solid #ddd; 
+  color: antiquewhite;
+}
+#formRoleSelect{
+  height: 100px;
+  
+}
+
+.heading::after {
+  content: '';
+  width: 160px;
+  height: 3px;
+  background: #00d2ff;
+  display: block;
+  margin: 5px 3px auto 0;
+  border-radius: 2px;
+  
+}
+
+/* Form fields styling */
+.formGroup {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.formLabel {
+  color: #555555;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+  font-weight: 500;
+  
+}
+
+.formControl {
+  padding: 8px;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+  width: 100%;
+
+}
+
+.formControl:focus {
+  border-color: #00d2ff;
+  box-shadow: 0 0 8px rgba(0, 210, 255, 0.2);
+}
+
+/* Button styles */
+.btnWrapper {
+  margin-top: 10px;
+}
+
+.btn, .forgotPasswordBtn {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover, .forgotPasswordBtn:hover {
+  background: linear-gradient(135deg, #2a6bb5, #00b8e5);
+}
+.footer a{
+  background: linear-gradient(135deg, #2a6bb5, #00b8e5); 
+}
+/* Footer */
+.footer {
+  margin-top: 20px;
+  height: 45px;
+  width: 100%;
+ 
+}
+
+.footer a {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}

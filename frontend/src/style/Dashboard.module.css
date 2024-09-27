@@ -1,0 +1,191 @@
+/* Main container for the entire dashboard layout */
+*{
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+.dashboardContainer {
+ 
+  display: flex;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: white;
+}
+
+/* Top navbar for the title and settings */
+.topNavbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #004d99;
+  color: #fff;
+  padding: 7px 30px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+/* Title centered in the top navbar */
+.title {
+ margin-left: 100px;
+   position: relative;
+  font-size: 1.8rem;
+  font-weight: bold;
+  flex: 1;
+  text-align: center;
+  margin-right: 60px; /* Adjust margin to avoid overlapping with the settings button */
+}
+
+/* Settings button styles */
+.settings {
+  position: relative;
+
+}
+
+.settingsButton {
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem; /* Increase the font size */
+  padding: 10px 20px; /* Add padding to increase the button size */
+  cursor: pointer;
+}
+
+
+/* Dropdown menu under settings button */
+.menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  /* background-color: #fff; */
+  background-color:  #004d99;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 10;
+  
+  
+}
+
+.menu button {
+  background: none;
+  border: none;
+  padding: 8px 10px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.menu button:hover {
+  background-color: #f1f1f1;
+}
+
+/* Sidebar styles */
+.sidebar {
+  background-color: #003366;
+  color: #fff;
+  width: 270px;
+  padding-top: 80px; /* Adds spacing to account for fixed navbar */
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+  padding-bottom: 20px;
+
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-top: 10px;
+  padding: 14px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar li:hover, .sidebar li a:hover {
+  background-color: #052647;
+}
+
+.sidebar li a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  background-color: #084079;
+}
+
+.active {
+  background-color: #004d99;
+}
+
+/* Main content styles */
+.mainContent {
+  margin-left: 270px;
+  padding: 100px 30px 30px;
+  width: calc(100% - 270px);
+  min-height: 100vh;
+  background-color: #fff;
+  overflow-y: auto;
+}
+
+.mainContent h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.mainContent p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .dashboardContainer {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    padding: 10px;
+  }
+
+  .mainContent {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .topNavbar {
+    position: static;
+  }
+}
+
+@media (max-width: 480px) {
+  .topNavbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .sidebar li {
+    padding: 10px 5px;
+    font-size: 0.9rem;
+  }
+
+  .mainContent h2 {
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,80 @@
+/* Main container styling */
+.Main {
+ margin-top: 30px;
+  width: 100%;
+ 
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+.heading22 {
+  margin-top: 30px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Form element styling */
+div {
+  margin-bottom: 15px;
+}
+
+/* Label styling */
+.feess {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Input field styling */
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Button styling */
+.buttonforfee {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.buttonforfee:hover {
+  background-color: #0056b3;
+}
+
+/* Table styling */
+.fees-list {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.fees-list th,
+.fees-list td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.fees-list th {
+  background-color: #f2f2f2;
+}
+
+/* Total amount styling */
+.total-amount {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}

@@ -1,0 +1,101 @@
+.school-settings-container {
+ 
+  /* height: 1000px; */
+  height: 6rem;
+  background-color: #0056b3;
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 4 6px 15px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+h2 {
+  
+  text-align: center;
+  color: #333;
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 70px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555;
+}
+form {
+  overflow: hidden; /* For both x and y */
+  overflow-x: hidden; /* Hide horizontal scroll bar */
+    overflow-y: hidden;
+  width: 100%; /* or set a fixed width */
+    height: auto; 
+}
+form, input, textarea, select, button {
+  box-sizing: border-box; /* Prevent elements from exceeding form boundaries */
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+#logo {
+  padding: 8px 0;
+}
+
+.school-settings-container button {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+p {
+  text-align: center;
+  color: green;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .school-settings-container {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  button {
+    padding: 12px;
+  }
+}

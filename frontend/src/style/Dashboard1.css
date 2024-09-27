@@ -1,0 +1,36 @@
+.dashboard-container {
+  display: flex; /* Use flexbox for horizontal alignment */
+  justify-content: center; /* Center the items horizontally */
+  align-items: flex-start; /* Align items to the top */
+  margin-top: 50px; /* Optional: add margin for spacing */
+}
+
+table {
+  border-collapse: collapse;
+  width: 200px; /* Set maximum width for the table */
+  margin-right: 180px; /* Push the table to the left */
+}
+
+/* Add spacing and font styles to table cells */
+td {
+  padding: 20px 50px; /* Adjust padding to control spacing */
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #f0f0f0; /* Subtle background color for table cells */
+  text-align: center;
+}
+
+/* Add hover effect for table cells */
+td:hover {
+  background-color: #e0e0e0;
+  cursor: pointer;
+}
+
+.chart-container {
+  width: 100%; 
+  
+  height: 400px; /* Set a fixed height */
+  margin-left: 20px; /* Add left margin for spacing */
+  padding: 0px;
+
+}

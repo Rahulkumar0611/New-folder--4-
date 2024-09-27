@@ -1,0 +1,68 @@
+.ReimbursementDetails-table-main {
+  width: 1000px; 
+  overflow-y: hidden; 
+  max-height: 1000px;  
+  padding: 20px; /* Add padding around the container */
+  margin-top: 210px; /* Add margin to push it down from the navbar */
+  background-color: #f8f9fa; /* Light background to differentiate from the navbar */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+.ReimbursementDetails-table-main h3 {
+  
+  margin-top: 100px;
+  margin-bottom: 20px; /* Space below the heading */
+  font-size: 24px; /* Larger font size for emphasis */
+  color: #343a40; /* Darker text color for better contrast */
+}
+
+#add-ReimbursementDetails-link {
+  display: inline-block; /* Make the link a block element */
+  margin-bottom: 20px; /* Space below the link */
+  padding: 10px 15px; /* Padding for the button */
+  background-color: #007bff; /* Primary color for the button */
+  color: white; /* White text color */
+  border-radius: 4px; /* Rounded corners */
+  text-decoration: none; /* Remove underline */
+}
+
+#add-ReimbursementDetails-link:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+.ReimbursementDetails-table {
+  width: 100%; /* Full width of the container */
+  border-collapse: collapse; /* Collapse table borders */
+ 
+  overflow-x: hidden; 
+  max-height: 1000px;  
+}
+
+.ReimbursementDetails-table th,
+.ReimbursementDetails-table td {
+  padding: 10px; /* Padding for cells */
+  text-align: left; /* Align text to the left */
+  border: 1px solid #dee2e6; /* Light border color */
+}
+
+.ReimbursementDetails-table th {
+  background-color: #e9ecef; /* Header background color */
+  font-weight: bold; /* Bold text for headers */
+}
+
+.ReimbursementDetails-table tr:nth-child(even) {
+  background-color: #f2f2f2; /* Light gray for even rows */
+}
+
+.view-button {
+  background-color: #28a745; /* Green button color */
+  color: white; /* White text */
+  border: none; /* No border */
+  padding: 5px 10px; /* Padding for button */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.view-button:hover {
+  background-color: #218838; /* Darker green on hover */
+}
