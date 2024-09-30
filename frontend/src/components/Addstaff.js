@@ -54,107 +54,108 @@ const Addstaff = () => {
   };
 
   return (
-    <div className="container">
-      <form onSubmit={addStaff} className="form">
-        <h1 className="title">Staff Registration Form</h1>
+    <div className="containerforstaff">
+      <form onSubmit={addStaff} className="formforstaff">
+        <h1 className="titleforstaff">Staff Registration Form</h1>
 
-        <div className="group">
+        <div className="groupforstaff">
           <label htmlFor="id" className="label">ID</label>
           <input
             type="text"
             value={_id}
             onChange={(e) => setId(e.target.value)}
-            className="input121"
+            className="inputforstaff"
             id="id"
             placeholder="Enter ID"
             required
           />
         </div>
 
-        <div className="group">
+        <div className="groupforstaff">
           <label htmlFor="firstName" className="label">First Name</label>
           <input
             type="text"        
             onChange={(e) => setFirstName(e.target.value)}
             value={firstName}
-            className="input121"
+            className="inputforstaff"
             id="firstName"
             placeholder="First Name"
             required
           />
         </div>
 
-        <div className="group">
+        <div className="groupforstaff">
           <label htmlFor="lastName" className="label">Last Name</label>
           <input
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            className="input121"
+            className="inputforstaff"
             id="lastName"
             placeholder="Last Name"
             required
           />
         </div>
 
-        <div className="group">
+        <div className="groupforstaff">
           <label htmlFor="email" className="label">Email</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="input121"
+            className="inputforstaff"
             id="email"
             placeholder="Email"
             required
           />
         </div>
 
-        <div className="group">
+        <div className="groupforstaff">
           <label htmlFor="phone" className="label">Phone</label>
           <input
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="input121"
+            className="inputforstaff"
             id="phone"
             placeholder="Phone"
             required
           />
         </div>
 
-        <div className="group">
+        <div className="groupforstaff">
           <label htmlFor="alternatePhone" className="label">Alternate Phone</label>
           <input
             type="tel"
             value={alternatePhone}
             onChange={(e) => setAlternatePhone(e.target.value)}
-            className="input121"
+            className="inputforstaff"
             id="alternatePhone"
             placeholder="Alternate Phone"
           />
         </div>
 
-        <div className="group">
+        <div className="groupforstaff">
           <label htmlFor="department" className="label">Department</label>
           <input
             type="text"
             value={department}
             onChange={(e) => setDepartment(e.target.value)}
-            className="input121"
+            className="inputforstaff"
             id="department"
             placeholder="Department"
             required
           />
         </div>
 
-        <div className="group">
+        <div className="groupforstaff">
           <label htmlFor="address" className="label">Address</label>
           <input
             type="text"
             value={address.street}
             onChange={(e) => setAddress({ ...address, street: e.target.value })}
             id="address"
+            className="inputforstaff"
             placeholder="Street"
             required
           />
@@ -163,6 +164,7 @@ const Addstaff = () => {
             value={address.city}
             onChange={(e) => setAddress({ ...address, city: e.target.value })}
             placeholder="City"
+            className="inputforstaff"
             required
           />
           <input
@@ -170,6 +172,7 @@ const Addstaff = () => {
             value={address.state}
             onChange={(e) => setAddress({ ...address, state: e.target.value })}
             placeholder="State"
+            className="inputforstaff"
             required
           />
           <input
@@ -177,11 +180,12 @@ const Addstaff = () => {
             value={address.zipCode}
             onChange={(e) => setAddress({ ...address, zipCode: e.target.value })}
             placeholder="Zip Code"
+            className="inputforstaff"
             required
           />
         </div>
 
-        <button type="submit" className="button">
+        <button type="submit" className="buttonforstaff">
           Save Staff
         </button>
       </form>

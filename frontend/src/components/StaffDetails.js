@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import "../style/studentdetails.css";
+import "../style/StaffDetails.css";
 import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
 import StudentDetailsModal from './StudentDetailsModal';
@@ -40,8 +40,8 @@ const StaffDetails = () => {
   };
 
   return (
-    <div id='header1'>
-      <h1 className="title">Staff Details</h1>
+    <div id='header131'>
+      <h1 className="title988">Staff Details</h1>
       <input
         type="text"
         placeholder="Search staff By ID, Name, Phone..."
@@ -67,12 +67,13 @@ const StaffDetails = () => {
       </div>
 
       <div className="table-container">
-        <table className="staff-table">
+        <table className="student-table">
           <thead id='tableheader'>
             <tr>
               <th>ID</th>
               <th id='th2'>First Name</th>
-              <th id='th4'>Phone</th>
+              <th >Phone</th>
+              <th id='th4'>Department</th>
               <th id='th5'>Actions</th>
             </tr>
           </thead>
@@ -81,9 +82,11 @@ const StaffDetails = () => {
               <tr key={staff._id}>
                 <td>{staff._id}</td>
                 <td>{staff.firstName}</td> {/* Corrected casing */}
-                <td>{staff.phone}</td> {/* Corrected casing */}
+                <td>{staff.phone}</td> 
+                {/* Corrected casing */}
+                <td>{staff.department}</td>
                 <td>
-                  <button onClick={() => handleViewClick(staff)} className="view-button">
+                  <button onClick={() => handleViewClick(staff)} className="view-button56">
                     View
                   </button>
                 </td>

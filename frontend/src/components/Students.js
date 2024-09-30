@@ -46,7 +46,7 @@ const Students = () => {
     <div id='header131'>
       <h1 className="title988">Student Details</h1>
       <input
-        type="text"
+        type="text"   
         placeholder="Search Student By ID, Name, Class, Phone..."
         id='searchbar'
         value={searchQuery}
@@ -58,7 +58,7 @@ const Students = () => {
 
       {/* Dropdown for Add Student */}
       <div className="dropdown">
-        <button onClick={() => setDropdownOpen(!dropdownOpen)} className="add-student-button">
+        <button onClick={() => setDropdownOpen(!dropdownOpen)} id='btnstudent' className="add-student-button">
           <AddIcon /> Add Student
         </button>
         {dropdownOpen && (

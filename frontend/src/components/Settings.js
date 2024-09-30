@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import  '../style/Settings.css'
 import axios from 'axios';
 
 const Settings = ({ updateSchoolSettings }) => {
