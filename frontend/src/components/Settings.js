@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import "../style/Settings.css"
 import axios from 'axios';
 
-const Settings = () => {
+const Settings = ({ updateSchoolSettings }) => {
   const [schoolName, setSchoolName] = useState('');
   const [address, setAddress] = useState('');
   const [contactInfo, setContactInfo] = useState('');
@@ -36,6 +35,7 @@ const Settings = () => {
       console.log(response);
       
       setMessage(response.data.message);
+      updateSchoolSettings(schoolName, logo); // Update the school name in the dashboard
     } catch (error) {
       setMessage('Failed to update settings: ' + error.message);
     }
@@ -47,53 +47,53 @@ const Settings = () => {
   };
 
   return (
-    <div className="school-settings-container">
+    <div>
       <h2>School Settings</h2>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
-        <div className="form-group">
-          <label htmlFor="schoolName">School Name</label>
-          <input
-            type="text"
-            id="schoolName"
-            value={schoolName}
-            onChange={(e) => setSchoolName(e.target.value)}
-            required
-          />
+        <div style={{ display: 'flex', gap: '20px' }}>
+          <div>
+            <label htmlFor="schoolName">School Name</label>
+            <input
+              type="text"
+              id="schoolName"
+              value={schoolName}
+              onChange={(e) => setSchoolName(e.target.value)}
+              required
+            />
+          </div>
+
+          <div>
+            <label htmlFor="contactInfo">Contact Info</label>
+            <input
+              type="text"
+              id="contactInfo"
+              value={contactInfo}
+              onChange={(e) => setContactInfo(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="schoolYear">School Year</label>
+            <input
+              type="text"
+              id="schoolYear"
+              value={schoolYear}
+              onChange={(e) => setSchoolYear(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="address">Address</label>
+            <input
+              type="text"
+              id="address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </div>
         </div>
 
-        
-
-        <div className="form-group">
-          <label htmlFor="contactInfo">Contact Info</label>
-          <input
-            type="text"
-            id="contactInfo"
-            value={contactInfo}
-            onChange={(e) => setContactInfo(e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="schoolYear">School Year</label>
-          <input
-            type="text"
-            id="schoolYear"
-            value={schoolYear}
-            onChange={(e) => setSchoolYear(e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="address">Address</label>
-          <input
-            type="text"
-            id="address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
+        <div>
           <label htmlFor="description">Description</label>
           <textarea
             id="description"
@@ -102,7 +102,7 @@ const Settings = () => {
           ></textarea>
         </div>
 
-        <div className="form-group">
+        <div>
           <label htmlFor="logo">School Logo</label>
           <input type="file" id="logo" onChange={handleLogoChange} />
         </div>

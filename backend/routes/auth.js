@@ -239,11 +239,11 @@ router.post('/create-admin', async (req, res) => {
 
 // Change Password Route
 router.post('/change-password', async (req, res) => {
-  const { email, oldPassword, newPassword, repeatPassword } = req.body; // Assuming email is sent from the frontend
+  const { oldPassword, newPassword, repeatPassword } = req.body; // Only require old and new passwords
 
   // Check if all required fields are provided
-  if (!email || !oldPassword || !newPassword || !repeatPassword) {
-    return res.status(400).json({ message: 'Email, old password, new password, and repeated password are required' });
+  if (!oldPassword || !newPassword || !repeatPassword) {
+    return res.status(400).json({ message: 'Old password, new password, and repeated password are required' });
   }
 
   // Check if new password and repeated password match
@@ -252,8 +252,8 @@ router.post('/change-password', async (req, res) => {
   }
 
   try {
-    // Find the admin by email
-    const admin = await Admin.findOne({ email });
+    // Assuming you have a way to get the admin (e.g., from the session)
+    const admin = await Admin.findOne({ /* criteria to find logged in admin */ });
 
     if (!admin) {
       return res.status(404).json({ message: 'Admin not found' });
@@ -270,19 +270,31 @@ router.post('/change-password', async (req, res) => {
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
     // Update the admin's password in the database
-    const updateResult = await Admin.updateOne({ email }, { password: hashedPassword });
+    const updateResult = await Admin.updateOne({ email: admin.email }, { password: hashedPassword });
 
     // Check if the update was successful
     if (updateResult.modifiedCount === 0) {
       return res.status(500).json({ message: 'Failed to update password. Please try again.' });
     }
 
+    // Send confirmation email
+    const mailOptions = {
+      from: process.env.EMAIL_USER, // Your email
+      to: admin.email, // Admin's email
+      subject: 'Password Changed Successfully',
+      text: 'Your password has been changed successfully.',
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log('Error sending email: ', error);
+      }
+      console.log('Email sent: ' + info.response);
+    });
+
     res.json({ message: 'Password updated successfully' });
   } catch (error) {
-    // Log the full error to get more details
     console.error('Error updating password:', error);
-
-    // Respond with a more detailed error message
     res.status(500).json({ message: 'Error updating password', error: error.message || 'An unexpected error occurred.' });
   }
 });
