@@ -33,6 +33,7 @@ const Students = () => {
   );
 
   const handleViewClick = (student) => {
+    localStorage.setItem('selectedStudent', JSON.stringify(student));
     setSelectedStudent(student);
   };
 
