@@ -2,7 +2,7 @@ const express=require('express')
 const router=express.Router();
 const Admin=require('../models/Admin');
 
-router.get('/adminss', async(req,res)=>{
+router.get('/admins', async(req,res)=>{
     try{
         const admins=await Admin.find();
         res.status(200).json({admins});
@@ -15,12 +15,12 @@ router.get('/adminss', async(req,res)=>{
 // Update admin status by ID
 router.put('/admins/:id', async (req, res) => {
   const { id } = req.params; // Admin ID from the request URL
-  const { status } = req.query; // New status from the query parameter
+  const { status } = req.body; // New status from the request body
 
   try {
     // Ensure that the status parameter is provided
     if (!status) {
-      return res.status(400).json({ message: 'Status query parameter is required' });
+      return res.status(400).json({ message: 'Status body parameter is required' });
     }
 
     // Find the admin by ID and update the status
@@ -40,6 +40,7 @@ router.put('/admins/:id', async (req, res) => {
 });
 
 
-module.exports = router;
+
+
 
 module.exports=router;

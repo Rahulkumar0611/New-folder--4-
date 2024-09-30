@@ -11,8 +11,8 @@ const ManageAdmins = () => {
   useEffect(() => {
     const fetchAdmins = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/admins'); // Adjust the URL based on your server setup
-        setAdmins(response.data.admins);
+        const response = await axios.get('http://localhost:5000/superadmin/admins'); // Updated URL for fetching admins
+        setAdmins(response.data.admins); // Ensure this structure matches your backend response
       } catch (error) {
         console.error('Error fetching admins:', error);
         setMessage('Error fetching admins');
@@ -42,12 +42,13 @@ const ManageAdmins = () => {
   const toggleAdminStatus = async (id, currentStatus) => {
     const newStatus = currentStatus === 'active' ? 'inactive' : 'active';
     try {
-      await axios.put(`http://localhost:5000/admins/${id}`, { status: newStatus }); // Assuming a PUT request updates the status
+      await axios.put(`http://localhost:5000/superadmin/admins/${id}`, { status: newStatus }); // Ensure the correct URL for updating status
       setAdmins((prevAdmins) =>
         prevAdmins.map((admin) =>
           admin._id === id ? { ...admin, status: newStatus } : admin
         )
       );
+      setMessage(`Admin ${newStatus === 'active' ? 'activated' : 'deactivated'} successfully!`);
     } catch (error) {
       console.error('Error toggling admin status:', error);
       setMessage('Error toggling admin status');
