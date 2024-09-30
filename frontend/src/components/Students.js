@@ -105,7 +105,6 @@ const Students = () => {
             onClose={handleCloseModal}
           />
         )}
-
         </div>
       </div>
   

@@ -1,34 +1,19 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../style/SuperAdminDashboard.css';
+import ManageAdmins from './ManageAdmins'; // Import the new component
 
 const SuperAdminDashboard = () => {
-  const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
-  const [view, setView] = useState('manageAdmins'); // State to control which section to display
-
-  const handleCreateAdmin = (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    // Simulate API call
-    setTimeout(() => {
-      setLoading(false);
-      setMessage('Admin created successfully!');
-      setEmail(''); // Clear the input
-    }, 2000);
-  };
+  const [view, setView] = useState('manageAdmins'); // Default view to 'manageAdmins'
 
   const handleNavigation = (section) => {
     setView(section);
-    setMessage('');
   };
 
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-        <a className='navbarBrand' href="#">Super Admin Panel</a>
+        <a className="navbarBrand" href="#">Super Admin Panel</a>
 
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
@@ -51,11 +36,11 @@ const SuperAdminDashboard = () => {
         </div>
       </nav>
 
-      <div className='superAdminDashboard'>
-        <div className='optionsContainer'>
+      <div className="superAdminDashboard">
+        <div className="optionsContainer">
           {/* Render different sections based on the current view */}
           {view === 'dashboard' && (
-            <div className='section'>
+            <div className="section">
               <h2>Dashboard Overview</h2>
               <p>Welcome, Super Admin! Here's an overview of the system.</p>
               <ul>
@@ -66,39 +51,20 @@ const SuperAdminDashboard = () => {
             </div>
           )}
 
-          {view === 'manageAdmins' && (
-            <div className='section'>
-              <h2>Manage Admins</h2>
-              <form onSubmit={handleCreateAdmin} className='form'>
-                <label htmlFor="email" className='label'>Admin Email:</label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  value={email} 
-                  onChange={(e) => setEmail(e.target.value)} 
-                  className='input' 
-                  required 
-                />
-                <button type="submit" className='button673' disabled={loading}>
-                  {loading ? 'Creating...' : 'Create Admin'}
-                </button>
-              </form>
-              {message && <p className='message'>{message}</p>}
-            </div>
-          )}
+          {view === 'manageAdmins' && <ManageAdmins />} {/* Render the new ManageAdmins component */}
 
           {view === 'systemSettings' && (
-            <div className='section'>
+            <div className="section">
               <h2>System Settings</h2>
               <p>Modify critical system settings here.</p>
-              <button className='button673'>Backup System Data</button>
-              <button className='button673'>Reset System</button>
-              <button className='button673'>Update Configuration</button>
+              <button className="button673">Backup System Data</button>
+              <button className="button673">Reset System</button>
+              <button className="button673">Update Configuration</button>
             </div>
           )}
 
           {view === 'logs' && (
-            <div className='section'>
+            <div className="section">
               <h2>System Logs</h2>
               <p>Review recent activities and error logs.</p>
               <ul>
@@ -106,7 +72,7 @@ const SuperAdminDashboard = () => {
                 <li>09/29/2024 - System backup completed successfully</li>
                 <li>09/28/2024 - New admin created: admin2@example.com</li>
               </ul>
-              <button className='button673'>Export Logs</button>
+              <button className="button673">Export Logs</button>
             </div>
           )}
         </div>
