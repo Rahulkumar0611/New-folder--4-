@@ -15,7 +15,7 @@ const SettingsSchema = new mongoose.Schema({
     type: String,
   },
   logo: {
-    type: String, // Store the path or URL to the logo file
+    type: String, 
   },
   description: {
     type: String,
