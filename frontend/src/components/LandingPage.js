@@ -28,7 +28,7 @@ const LandingPage = () => {
       const superAdminPassword = "superadminpassword"; // Replace with your actual password
 
       if (email === superAdminEmail && password === superAdminPassword) {
-        alert("Super Admin login successful");
+        alert("Super Admin login successful");  
         const superAdminData = { email: superAdminEmail, role: "superadmin" };
         localStorage.setItem("superAdmin", JSON.stringify(superAdminData));
         navigate('/superAdmindashboard');
@@ -43,8 +43,9 @@ const LandingPage = () => {
           console.log(res.data);  // Check the response structure
           // Store the user data in localStorage
           localStorage.setItem("Admin", JSON.stringify(res.data.user));
-          navigate('/dashboard');
           alert("Login successful");
+          navigate('/dashboard');
+          
         })
         .catch((err) => {
           console.log(err);

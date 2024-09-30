@@ -97,5 +97,26 @@ router.get('/payments/:studentId', async (req, res) => {
     res.status(500).json({ message: 'Failed to fetch payments', error });
   }
 });
+// Backend Route for adding individual fees
+router.post('/addStudentSpecificFee', async (req, res) => {
+  const { studentId, feeType, amount } = req.body;
+
+  try {
+    const updatedStudent = await Student.findByIdAndUpdate(
+      studentId,
+      { $push: { fees: { feeType, amount } } },
+      { new: true }
+    );
+
+    if (!updatedStudent) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+
+    res.status(200).json({ message: 'Fee added successfully', student: updatedStudent });
+  } catch (err) {
+    res.status(400).json({ message: 'Error adding fee', error: err.message });
+  }
+});
+
 
 module.exports = router;

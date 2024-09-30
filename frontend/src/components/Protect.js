@@ -7,8 +7,9 @@ function Protect({ Child }) {
         return localStorage.getItem("Admin") !== null;
     };
     const isSuperAdmin = () => {
-        return localStorage.getItem("SuperAdmin") !== null;
+        return localStorage.getItem("superAdmin") !== null; // Match the case here
     };
+
     return (
         <div>
             {isSuperAdmin() ? <Child /> : isAdmin() ? <Child /> : <Navigate to="/" />}
