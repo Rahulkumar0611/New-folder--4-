@@ -75,7 +75,7 @@ const Students = () => {
           <thead id='tableheader'>
             <tr>
               <th>ID</th>
-              <th id='th2'>First Name</th>
+              <th id='th2'>Name</th>
               <th>Class</th>
               <th id='th4'>Phone</th>
               <th id='th5'>Actions</th>
