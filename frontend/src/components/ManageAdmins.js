@@ -11,8 +11,13 @@ const ManageAdmins = () => {
   useEffect(() => {
     const fetchAdmins = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/superadmin/admins'); // Updated URL for fetching admins
-        setAdmins(response.data.admins); // Ensure this structure matches your backend response
+        const response = await axios.get('http://localhost:5000/superadmin/admins');
+        if (response.data && response.data.admins) {
+          setAdmins(response.data.admins); // Ensure admins data is available
+        } else {
+          setAdmins([]); // Set an empty array if no admins are returned
+          setMessage('No admins found');
+        }
       } catch (error) {
         console.error('Error fetching admins:', error);
         setMessage('Error fetching admins');
@@ -30,7 +35,9 @@ const ManageAdmins = () => {
       const response = await axios.post('http://localhost:5000/auth/create-admin', { email });
       setMessage('Admin created successfully!');
       setEmail(''); // Clear input
-      setAdmins((prev) => [...prev, response.data.admin]); // Assuming the created admin is returned in response
+      if (response.data && response.data.admin) {
+        setAdmins((prev) => [...prev, response.data.admin]); // Add the newly created admin to the list
+      }
     } catch (error) {
       console.error('Error creating admin:', error);
       setMessage('Error creating admin');
@@ -40,20 +47,28 @@ const ManageAdmins = () => {
   };
 
   const toggleAdminStatus = async (id, currentStatus) => {
-    const newStatus = currentStatus === 'active' ? 'inactive' : 'active';
+    // The status will only be set to inactive when explicitly deactivated
+    const newStatus = currentStatus === 'inactive' ? 'active' : 'inactive';
+  
     try {
-      await axios.put(`http://localhost:5000/superadmin/admins/${id}`, { status: newStatus }); // Ensure the correct URL for updating status
+      // Update the admin's status on the backend
+      await axios.put(`http://localhost:5000/superadmin/admins/${id}`, { status: newStatus });
+  
+      // Update the local state to reflect the new status
       setAdmins((prevAdmins) =>
         prevAdmins.map((admin) =>
           admin._id === id ? { ...admin, status: newStatus } : admin
         )
       );
+  
+      // Set the success message
       setMessage(`Admin ${newStatus === 'active' ? 'activated' : 'deactivated'} successfully!`);
     } catch (error) {
       console.error('Error toggling admin status:', error);
       setMessage('Error toggling admin status');
     }
   };
+  
 
   return (
     <div>
@@ -76,31 +91,35 @@ const ManageAdmins = () => {
       {message && <p className="message">{message}</p>}
 
       <h3>Admin List</h3>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>Email</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {admins.map((admin) => (
-            <tr key={admin._id}>
-              <td>{admin.email}</td>
-              <td>{admin.status}</td>
-              <td>
-                <button
-                  className="button673"
-                  onClick={() => toggleAdminStatus(admin._id, admin.status)}
-                >
-                  {admin.status === 'active' ? 'Deactivate' : 'Activate'}
-                </button>
-              </td>
+      {admins.length > 0 ? (
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {admins.map((admin) => (
+              <tr key={admin._id}>
+                <td>{admin.email}</td>
+                <td>{admin.status}</td>
+                <td>
+                  <button
+                    className="button673"
+                    onClick={() => toggleAdminStatus(admin._id, admin.status)}
+                  >
+                    {admin.status === 'active' ? 'Deactivate' : 'Activate'}
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p>No admins to display</p>
+      )}
     </div>
   );
 };

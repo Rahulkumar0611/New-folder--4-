@@ -15,22 +15,22 @@ const transporter = nodemailer.createTransport(emailConfig);
 
 const router = express.Router();
 
+
+
 router.post('/login', async (req, res) => {
   try {
-    const { email, password, role } = req.body; // Get role from request body
+    const { email, password, role } = req.body;
 
     if (!email || !password || !role) {
       return res.status(400).json({ error: 'Email, password, and role are required' });
     }
 
+    // Superadmin login
     if (role === 'superadmin') {
-      // Hardcoded Super Admin credentials
-      const superAdminEmail = 'superadmin@example.com';
-      const superAdminPassword = 'superadminpassword'; // Replace with your actual password
+      const superAdminEmail = 'yakshitechsolutions@gmail.com';
+      const superAdminPassword = 'superadminpassword'; // Replace with actual password
 
       if (email === superAdminEmail && password === superAdminPassword) {
-        // Return Super Admin data
-        
         return res.status(200).json({
           message: 'Super Admin login successful',
           user: {
@@ -43,21 +43,24 @@ router.post('/login', async (req, res) => {
       }
     }
 
-    // Find user by email for Admin login
+    // Admin login
     const user = await Admin.findOne({ email });
     if (!user) {
-      console.log('User not found:', email);
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
-    // Compare the provided password with the hashed password stored in the database
+    // Check if the admin is active
+    if (user.status !== 'active') {
+      return res.status(403).json({ error: 'Admin account is deactivated' });
+    }
+
+    // Compare the provided password with the hashed password
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
-      console.log('Password mismatch for user:', email);
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
-    // Return Admin user data on successful login
+    // Successful Admin login
     res.status(200).json({
       message: 'Admin login successful',
       user: {

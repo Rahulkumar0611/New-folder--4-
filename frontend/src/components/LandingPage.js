@@ -3,18 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import styles from '../style/LandingPage.module.css'; // Importing the CSS module
+import styles from '../style/LandingPage.module.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'; // Import the icons you need
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const LandingPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("admin"); // State for user role
-  const navigate = useNavigate();
-
+  const [role, setRole] = useState("admin");
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -28,7 +27,7 @@ const LandingPage = () => {
       const superAdminPassword = "superadminpassword"; // Replace with your actual password
 
       if (email === superAdminEmail && password === superAdminPassword) {
-        alert("Super Admin login successful");  
+        alert("Super Admin login successful");
         const superAdminData = { email: superAdminEmail, role: "superadmin" };
         localStorage.setItem("superAdmin", JSON.stringify(superAdminData));
         navigate('/superAdmindashboard');
@@ -40,22 +39,23 @@ const LandingPage = () => {
       // Admin login via API
       axios.post('http://localhost:5000/auth/login', { email, password, role })
         .then((res) => {
-          console.log(res.data);  // Check the response structure
-          // Store the user data in localStorage
-          localStorage.setItem("Admin", JSON.stringify(res.data.user));
-          alert("Login successful");
-          navigate('/dashboard');
-          
+          if (res.data && res.data.user) {
+            localStorage.setItem("Admin", JSON.stringify(res.data.user));
+            alert("Login successful");
+            navigate('/dashboard');
+          } else {
+            alert(res.data.error || "Invalid credentials");
+          }
         })
         .catch((err) => {
-          console.log(err);
-          alert("Invalid credentials");
+          console.error(err.response?.data?.error || err.message);
+          alert(err.response?.data?.error || "An error occurred during login");
         });
-    } // Close the else statement here
+    }
   };
 
   return (
-    <div className={styles.AdminLogin}> {/* Use scoped class names */}
+    <div className={styles.AdminLogin}>
       <Form onSubmit={verifyAdmin}>
         <h6>Please enter your details</h6>
         <h1 className={styles.heading}>Welcome Back</h1>
@@ -77,7 +77,7 @@ const LandingPage = () => {
             <Form.Control
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              type={showPassword ? 'text' : 'password'} 
+              type={showPassword ? 'text' : 'password'}
               placeholder="Password"
               className={styles.formControl}
             />
@@ -109,7 +109,7 @@ const LandingPage = () => {
         </div>
       </Form>
       <footer className={styles.footer}>
-        <p>Forgot your password? <Link to="/forgot-password">Reset it here</Link></p> {/* Link to ForgotPassword */}
+        <p>Forgot your password? <Link to="/forgot-password">Reset it here</Link></p>
       </footer>
     </div>
   );

@@ -6,6 +6,7 @@ const crypto = require('crypto');
 const AdminSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  status: { type: String, default: 'active' }, 
   resetPasswordToken: { type: String },
   resetPasswordExpires: { type: Date },
 });
