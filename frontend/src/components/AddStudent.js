@@ -9,40 +9,38 @@ const AddStudent = () => {
   const [Middlename, setMiddlename] = useState("");
   const [Lastname, setlastname] = useState("");
   const [Class, setclass] = useState("");
-  const[Section,setSection]=useState("");
+  const [Section, setSection] = useState("");
   const [Fathersname, setfathersname] = useState("");
   const [Mothersname, setmothersname] = useState("");
   const [Phone, setphone] = useState("");
   const [AlternatePhone, setalternatephone] = useState("");
   const [Address, setaddress] = useState("");
-
+  const [AadhaarNumber, setAadhaarNumber] = useState("")
+  const [Gender, setGender] = useState("")
 
   const addStudent = (e) => {
-    const data = { _id, Firstname,Middlename, Lastname, Class, Section, Fathersname, Mothersname, Phone, AlternatePhone, Address };
+    const data = { _id, Firstname, Middlename, Lastname, Class, Section, Fathersname, Mothersname, Phone, AlternatePhone, AadhaarNumber, Gender, Address };
 
     e.preventDefault();
     axios
-    .post(`http://localhost:5000/auth/addStudent`, data)
-    .then((res) => {
-      console.log('API Response:', res);
-      console.log('Response Data:', res.data);
+      .post(`http://localhost:5000/auth/addStudent`, data)
+      .then((res) => {
+        console.log('API Response:', res);
+        console.log('Response Data:', res.data);
 
-      // Check if the response contains the student data
-      if (res.data && res.data.student) {
-        // Store the student data in localStorage
-        localStorage.setItem("student", JSON.stringify(res.data.student));
-      //  window.localStorage.setItem("student", JSON.stringify(res.data.student));
-        alert("Student added successfully and data saved to localStorage.");
-      } else {
-        console.error("Invalid response structure");
-        alert("Failed to add student.");
-      }
-    })
-    .catch((err) => {
-      console.error("Error adding student:", err); // Log the error
-      alert("Invalid Input");
-    });
-};
+        // Check if the response contains the student data
+        if (res.data) {
+          alert("Student added successfully");
+        } else {
+          console.error("Invalid response structure");
+          alert("Failed to add student.");
+        }
+      })
+      .catch((err) => {
+        console.error("Error adding student:", err); // Log the error
+        alert("Invalid Input");
+      });
+  };
 
   return (
     <div className="container131">
@@ -65,30 +63,30 @@ const AddStudent = () => {
         <div className="group">
           <label htmlFor="firstname" className="label">First name</label>
           <input
-            type="text"        
+            type="text"
             onChange={(e) => setfirstname(e.target.value)}
             value={Firstname}
             className="input121"
             id="firstname"
             placeholder="First name"
-            
+
           />
         </div>
 
         <div className="group">
-          <label htmlFor="firstname" className="label">Middle name</label>
+          <label htmlFor="middlename" className="label">Middle name</label>
           <input
-            type="text"        
+            type="text"
             onChange={(e) => setMiddlename(e.target.value)}
             value={Middlename}
             className="input121"
             id="middlename"
             placeholder="Middle name"
-           
+
           />
         </div>
 
-        
+
 
         <div className="group">
           <label htmlFor="lastname" className="label">Last name</label>
@@ -178,14 +176,33 @@ const AddStudent = () => {
             placeholder="Alternate Phone"
           />
         </div>
-
+        <div className="group">
+          <label htmlFor="aadhaarnumber" className="label">Aadhaar Number</label>
+          <input
+            type="tel"
+            value={AadhaarNumber}
+            onChange={(e) => setAadhaarNumber(e.target.value)}
+            className="input121"
+            id="aadhaarnumber"
+            placeholder="Aadhaar Number"
+          />
+        </div>
+        <div className="group">
+          <label htmlFor="Gender">Gender:</label>
+          <select id="Gender" value={Gender}  required>
+            <option value="" disabled>Select Gender</option> 
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
         <div className="group">
           <label htmlFor="address" className="label">Address</label>
           <input
             type="text"
             value={Address}
             onChange={(e) => setaddress(e.target.value)}
-            
+
             id="address"
             placeholder="1234 Main St"
           />

@@ -74,9 +74,9 @@ router.post('/login', async (req, res) => {
 // create Student data
 router.post('/addStudent', async (req, res) => {
   try {
-    const { _id, Firstname, Middlename,Lastname, Class, Section, Fathersname, Mothersname, Phone, AlternatePhone, Address } = req.body;
+    const { _id, Firstname, Middlename,Lastname, Class, Section, Fathersname, Mothersname, Phone, AlternatePhone,AadhaarNumber,Gender, Address } = req.body;
 
-    const newStudent = new Student({ _id, Firstname, Middlename,Lastname, Class, Section, Fathersname, Mothersname, Phone, AlternatePhone, Address })
+    const newStudent = new Student({ _id, Firstname, Middlename,Lastname, Class, Section, Fathersname, Mothersname, Phone, AlternatePhone,AadhaarNumber,Gender, Address })
     await newStudent.save();
 
     res.status(201).json({ message: 'Student Added' });

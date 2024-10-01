@@ -33,6 +33,10 @@ const staffSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  aadhaarnumber:{
+    type:String,
+    required:true
+  },
   address: {
     street: String,
     city: String,
