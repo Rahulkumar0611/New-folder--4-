@@ -19,8 +19,7 @@ import StaffBulk from './StaffBulk';
 import Addstaff from './Addstaff';
 import IncomeAndExpenditure from './IncomeAndExpenditure';
 import ViewStaff from './ViewStaff';
-
-
+import ChangePassword from './ChangePassword';
 
 const Dashboard = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,8 +35,12 @@ const Dashboard = () => {
     localStorage.clear();
     alert('Logged out');
     setIsMenuOpen(false);
-    navigate("/");
-    
+    navigate("/");    
+  };
+
+  const handleChangePassword = () => {
+    // Navigate to the change password page
+    navigate("change-password"); // Updated URL
   };
 
   // Update the school name and logo
@@ -65,7 +68,7 @@ const Dashboard = () => {
           {isMenuOpen && (
             <div className={style.menu}>
               <button onClick={handleLogout}>Logout</button>
-              <button onClick={handleLogout}>Change Password</button>
+              <button onClick={handleChangePassword}>Change Password</button>
             </div>
           )}
         </div>
@@ -74,7 +77,7 @@ const Dashboard = () => {
       {/* Sidebar */}
       <div className={style.sidebar}>
         <ul>
-        <li><Link to="/dashboard">Dashboard</Link></li>
+          <li><Link to="/dashboard">Dashboard</Link></li>
           <li><Link to="/dashboard/settings">Settings</Link></li>
           <li><Link to="/dashboard/students">Student Details</Link></li>
           <li><Link to="/dashboard/staff">Staff Info</Link></li>
@@ -83,8 +86,6 @@ const Dashboard = () => {
           <li><Link to="/dashboard/CourseFee">Course Fee Details</Link></li>
           <li><Link to="/dashboard/reports">Reports</Link></li>
           <li><Link to="/dashboard/reimbursementdetails">Reimbursement Details</Link></li>
-          
-
         </ul>
       </div>
 
@@ -108,7 +109,7 @@ const Dashboard = () => {
           <Route path="/staff/bulkjoinees" element={<StaffBulk/>}/>
           <Route path="/staff/addstaff" element={<Addstaff/>}/>
           <Route path="/staff/viewstaff" element={<ViewStaff/>}/>
-          
+          <Route path="change-password" element={<ChangePassword/>}/> {/* Updated URL */}
         </Routes>
       </div>
     </div>
