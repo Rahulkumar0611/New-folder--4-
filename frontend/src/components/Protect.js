@@ -1,18 +1,28 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-function Protect({ Child }) {
-
+function Protect({ Child, requiredRole }) {
     const isAdmin = () => {
         return localStorage.getItem("Admin") !== null;
     };
     const isSuperAdmin = () => {
-        return localStorage.getItem("superAdmin") !== null; // Match the case here
+        return localStorage.getItem("superAdmin") !== null;
+    };
+
+    // Check user roles and redirect accordingly
+    const hasAccess = () => {
+        if (requiredRole === 'superadmin') {
+            return isSuperAdmin();
+        }
+        if (requiredRole === 'admin') {
+            return isAdmin();
+        }
+        return false;
     };
 
     return (
         <div>
-            {isSuperAdmin() ? <Child /> : isAdmin() ? <Child /> : <Navigate to="/" />}
+            {hasAccess() ? <Child /> : <Navigate to="/" />}
         </div>
     );
 }

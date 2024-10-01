@@ -4,11 +4,9 @@ import LandingPage from './components/LandingPage';
 import Dashboard from './components/Dashboard';
 import Students from './components/Students';
 import ForgotPassword from './components/ForgotPassword';
-import ResetPassword from './components/ResetPassword'
+import ResetPassword from './components/ResetPassword';
 import SuperAdminDashboard from './components/SuperAdminDashboard';
 import Protect from './components/Protect';
-
-
 
 function App() {
   return (
@@ -16,11 +14,11 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage/>} />
-          <Route path="/dashboard/*" element={<Protect Child={Dashboard}/>}/>
-          <Route path="/students/*" element={<Students/>}/>
+          <Route path="/dashboard/*" element={<Protect Child={Dashboard} requiredRole="admin" />} />
+          <Route path="/students/*" element={<Protect Child={Students} requiredRole="admin" />} />
           <Route path="/forgot-password" element={<ForgotPassword />} /> 
-          <Route path="/reset-password" element={<ResetPassword/>} />
-          <Route path="/superAdmindashboard/*" element = {<Protect Child={SuperAdminDashboard}/>}/>
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/superAdmindashboard/*" element={<Protect Child={SuperAdminDashboard} requiredRole="superadmin" />} />
         </Routes>
       </Router>
     </div>
