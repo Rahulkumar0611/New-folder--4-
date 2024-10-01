@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import style from '../style/Dashboard.module.css';
 import Students from './Students'; 
@@ -26,6 +26,7 @@ const Dashboard = () => {
   const [schoolName, setSchoolName] = useState("School Name"); 
   const [logo, setLogo] = useState(null);
   const navigate = useNavigate();
+  const menuRef = useRef(null); // Create a ref for the menu
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -39,15 +40,30 @@ const Dashboard = () => {
   };
 
   const handleChangePassword = () => {
-    // Navigate to the change password page
-    navigate("change-password"); // Updated URL
+    navigate("change-password");
   };
 
-  // Update the school name and logo
   const updateSchoolSettings = (name, logoFile) => {
     setSchoolName(name);
     setLogo(URL.createObjectURL(logoFile));
   };
+
+  // Close menu when clicking outside of it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    // Add event listener
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Cleanup event listener on unmount
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className={style.dashboardContainer}>
@@ -61,7 +77,7 @@ const Dashboard = () => {
           {logo && <img src={logo} alt="School Logo" className={style.logoImage} />}
         </div>
 
-        <div className={style.settings}>
+        <div className={style.settings} ref={menuRef}>
           <button onClick={toggleMenu} className={style.settingsButton}>
             <AccountBoxIcon/>
           </button>
@@ -109,7 +125,7 @@ const Dashboard = () => {
           <Route path="/staff/bulkjoinees" element={<StaffBulk/>}/>
           <Route path="/staff/addstaff" element={<Addstaff/>}/>
           <Route path="/staff/viewstaff" element={<ViewStaff/>}/>
-          <Route path="change-password" element={<ChangePassword/>}/> {/* Updated URL */}
+          <Route path="change-password" element={<ChangePassword/>}/>
         </Routes>
       </div>
     </div>
