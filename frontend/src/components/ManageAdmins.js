@@ -13,9 +13,9 @@ const ManageAdmins = () => {
       try {
         const response = await axios.get('http://localhost:5000/superadmin/admins');
         if (response.data && response.data.admins) {
-          setAdmins(response.data.admins); // Ensure admins data is available
+          setAdmins(response.data.admins); 
         } else {
-          setAdmins([]); // Set an empty array if no admins are returned
+          setAdmins([]); 
           setMessage('No admins found');
         }
       } catch (error) {
