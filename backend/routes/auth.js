@@ -6,6 +6,7 @@ const Admin = require('../models/Admin');
 const Payment = require('../models/Payment');
 const Student = require('../models/Student');
 const CourseFee = require('../models/CourseFee');
+const Permission=require('../models/Permission');
 
 const transporter = nodemailer.createTransport(emailConfig);
 
@@ -345,6 +346,18 @@ router.get('/findByClass', async (req, res) => {
     res.json(courseFees);
   } catch (error) {
     console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+router.get('/permissions/:adminId', async (req, res) => {
+  try {
+    const permissions = await Permission.findOne({ adminId: req.params.adminId });
+    if (!permissions) {
+      return res.status(404).json({ message: 'Permissions not found' });
+    }
+    res.json(permissions);
+  } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }
 });

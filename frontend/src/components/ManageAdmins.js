@@ -6,6 +6,23 @@ const ManageAdmins = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [admins, setAdmins] = useState([]);
+  const [permissions, setPermissions] = useState({
+    adminId: '',
+    canViewDashboard: true,
+    canManagePayments: true,
+    canViewReports: true,
+    canViewStudents: true,
+    canViewStaff: true,
+    canViewIncomeExpenditures: true,
+    canViewCourseFee: true,
+    canViewSettings: true,
+    canManageReimbursementDetails: true,
+    canBulkAdmission: true,
+    canManageStudents: true,
+    canChangePassword: true,
+    canBulkJoinees: true,
+    canManageStaff: true,
+  });
 
   // Fetch admins from the server on component mount
   useEffect(() => {
@@ -47,28 +64,46 @@ const ManageAdmins = () => {
   };
 
   const toggleAdminStatus = async (id, currentStatus) => {
-    // The status will only be set to inactive when explicitly deactivated
     const newStatus = currentStatus === 'inactive' ? 'active' : 'inactive';
   
     try {
-      // Update the admin's status on the backend
       await axios.put(`http://localhost:5000/superadmin/admins/${id}`, { status: newStatus });
   
-      // Update the local state to reflect the new status
       setAdmins((prevAdmins) =>
         prevAdmins.map((admin) =>
           admin._id === id ? { ...admin, status: newStatus } : admin
         )
       );
-  
-      // Set the success message
+
       setMessage(`Admin ${newStatus === 'active' ? 'activated' : 'deactivated'} successfully!`);
     } catch (error) {
       console.error('Error toggling admin status:', error);
       setMessage('Error toggling admin status');
     }
   };
-  
+
+  const handlePermissionsChange = async (adminId) => {
+    try {
+      if (adminId) {
+        await axios.put(`http://localhost:5000/superadmin/admins/${adminId}/permissions`, permissions);
+        setMessage('Permissions updated successfully!');
+      } else {
+        // Optionally handle case where adminId is not set
+        setMessage('Please select an admin to update permissions.');
+      }
+    } catch (error) {
+      console.error('Error updating permissions:', error);
+      setMessage('Error updating permissions');
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, type, checked } = e.target;
+    setPermissions({
+      ...permissions,
+      [name]: type === 'checkbox' ? checked : permissions[name],
+    });
+  };
 
   return (
     <div>
@@ -112,6 +147,15 @@ const ManageAdmins = () => {
                   >
                     {admin.status === 'active' ? 'Deactivate' : 'Activate'}
                   </button>
+                  <button
+                    className="button673"
+                    onClick={() => {
+                      setPermissions({ ...permissions, adminId: admin._id });
+                      handlePermissionsChange(admin._id);
+                    }}
+                  >
+                    Manage Permissions
+                  </button>
                 </td>
               </tr>
             ))}
@@ -120,6 +164,36 @@ const ManageAdmins = () => {
       ) : (
         <p>No admins to display</p>
       )}
+
+      <h3>Manage Permissions</h3>
+      <form onSubmit={(e) => { e.preventDefault(); handlePermissionsChange(permissions.adminId); }}>
+        <input
+          type="text"
+          name="adminId"
+          value={permissions.adminId}
+          readOnly
+        />
+        <label>
+          <input
+            type="checkbox"
+            name="canViewDashboard"
+            checked={permissions.canViewDashboard}
+            onChange={handleInputChange}
+          />
+          Can View Dashboard
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="canManagePayments"
+            checked={permissions.canManagePayments}
+            onChange={handleInputChange}
+          />
+          Can Manage Payments
+        </label>
+        {/* Add more permission checkboxes as needed */}
+        <button type="submit" className="button673">Save Permissions</button>
+      </form>
     </div>
   );
 };
