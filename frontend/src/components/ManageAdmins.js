@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+
+
 const ManageAdmins = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
@@ -17,22 +19,22 @@ const ManageAdmins = () => {
     canViewCourseFee: true,
     canViewSettings: true,
     canManageReimbursementDetails: true,
+    canAddStudent: true,
+    canUpdateStudent: true,
     canBulkAdmission: true,
-    canManageStudents: true,
+    canAddStaff: true,
+    canViewStaffDetails: true,
     canChangePassword: true,
-    canBulkJoinees: true,
-    canManageStaff: true,
   });
 
-  // Fetch admins from the server on component mount
   useEffect(() => {
     const fetchAdmins = async () => {
       try {
         const response = await axios.get('http://localhost:5000/superadmin/admins');
         if (response.data && response.data.admins) {
-          setAdmins(response.data.admins); 
+          setAdmins(response.data.admins);
         } else {
-          setAdmins([]); 
+          setAdmins([]);
           setMessage('No admins found');
         }
       } catch (error) {
@@ -40,7 +42,6 @@ const ManageAdmins = () => {
         setMessage('Error fetching admins');
       }
     };
-
     fetchAdmins();
   }, []);
 
@@ -65,16 +66,15 @@ const ManageAdmins = () => {
 
   const toggleAdminStatus = async (id, currentStatus) => {
     const newStatus = currentStatus === 'inactive' ? 'active' : 'inactive';
-  
+
     try {
       await axios.put(`http://localhost:5000/superadmin/admins/${id}`, { status: newStatus });
-  
+
       setAdmins((prevAdmins) =>
         prevAdmins.map((admin) =>
           admin._id === id ? { ...admin, status: newStatus } : admin
         )
       );
-
       setMessage(`Admin ${newStatus === 'active' ? 'activated' : 'deactivated'} successfully!`);
     } catch (error) {
       console.error('Error toggling admin status:', error);
@@ -85,10 +85,9 @@ const ManageAdmins = () => {
   const handlePermissionsChange = async (adminId) => {
     try {
       if (adminId) {
-        await axios.put(`http://localhost:5000/superadmin/admins/${adminId}/permissions`, permissions);
+        await axios.put(`http://localhost:5000/permission/${adminId}`, permissions);
         setMessage('Permissions updated successfully!');
       } else {
-        // Optionally handle case where adminId is not set
         setMessage('Please select an admin to update permissions.');
       }
     } catch (error) {
@@ -123,56 +122,34 @@ const ManageAdmins = () => {
           {loading ? 'Creating...' : 'Create Admin'}
         </button>
       </form>
-      {message && <p className="message">{message}</p>}
+
+      {message && <p>{message}</p>}
 
       <h3>Admin List</h3>
-      {admins.length > 0 ? (
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Email</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {admins.map((admin) => (
-              <tr key={admin._id}>
-                <td>{admin.email}</td>
-                <td>{admin.status}</td>
-                <td>
-                  <button
-                    className="button673"
-                    onClick={() => toggleAdminStatus(admin._id, admin.status)}
-                  >
-                    {admin.status === 'active' ? 'Deactivate' : 'Activate'}
-                  </button>
-                  <button
-                    className="button673"
-                    onClick={() => {
-                      setPermissions({ ...permissions, adminId: admin._id });
-                      handlePermissionsChange(admin._id);
-                    }}
-                  >
-                    Manage Permissions
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <p>No admins to display</p>
-      )}
+      <ul>
+        {admins.map((admin) => (
+          <li key={admin._id}>
+            {admin.email} - {admin.status}
+            <button onClick={() => toggleAdminStatus(admin._id, admin.status)}>
+              {admin.status === 'inactive' ? 'Activate' : 'Deactivate'}
+            </button>
+          </li>
+        ))}
+      </ul>
 
-      <h3>Manage Permissions</h3>
-      <form onSubmit={(e) => { e.preventDefault(); handlePermissionsChange(permissions.adminId); }}>
-        <input
-          type="text"
-          name="adminId"
-          value={permissions.adminId}
-          readOnly
-        />
+      <h3>Update Admin Permissions</h3>
+      <div>
+        <label>Admin ID:</label>
+        <select onChange={(e) => setPermissions({ ...permissions, adminId: e.target.value })}>
+          <option value="">Select an Admin</option>
+          {admins.map((admin) => (
+            <option key={admin._id} value={admin._id}>
+              {admin.email}
+            </option>
+          ))}
+        </select>
+
+        {/* Render checkboxes for all permissions */}
         <label>
           <input
             type="checkbox"
@@ -191,9 +168,128 @@ const ManageAdmins = () => {
           />
           Can Manage Payments
         </label>
-        {/* Add more permission checkboxes as needed */}
-        <button type="submit" className="button673">Save Permissions</button>
-      </form>
+        <label>
+          <input
+            type="checkbox"
+            name="canViewReports"
+            checked={permissions.canViewReports}
+            onChange={handleInputChange}
+          />
+          Can View Reports
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="canViewStudents"
+            checked={permissions.canViewStudents}
+            onChange={handleInputChange}
+          />
+          Can View Students
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="canViewStaff"
+            checked={permissions.canViewStaff}
+            onChange={handleInputChange}
+          />
+          Can View Staff
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="canViewIncomeExpenditures"
+            checked={permissions.canViewIncomeExpenditures}
+            onChange={handleInputChange}
+          />
+          Can View Income & Expenditures
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="canViewCourseFee"
+            checked={permissions.canViewCourseFee}
+            onChange={handleInputChange}
+          />
+          Can View Course Fee
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="canViewSettings"
+            checked={permissions.canViewSettings}
+            onChange={handleInputChange}
+          />
+          Can View Settings
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="canManageReimbursementDetails"
+            checked={permissions.canManageReimbursementDetails}
+            onChange={handleInputChange}
+          />
+          Can Manage Reimbursement Details
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="canAddStudent"
+            checked={permissions.canAddStudent}
+            onChange={handleInputChange}
+          />
+          Can Add Student
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="canUpdateStudent"
+            checked={permissions.canUpdateStudent}
+            onChange={handleInputChange}
+          />
+          Can Update Student
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="canBulkAdmission"
+            checked={permissions.canBulkAdmission}
+            onChange={handleInputChange}
+          />
+          Can Perform Bulk Admission
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="canAddStaff"
+            checked={permissions.canAddStaff}
+            onChange={handleInputChange}
+          />
+          Can Add Staff
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="canViewStaffDetails"
+            checked={permissions.canViewStaffDetails}
+            onChange={handleInputChange}
+          />
+          Can View Staff Details
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="canChangePassword"
+            checked={permissions.canChangePassword}
+            onChange={handleInputChange}
+          />
+          Can Change Password
+        </label>
+
+        <button onClick={() => handlePermissionsChange(permissions.adminId)}>
+          Update Permissions
+        </button>
+      </div>
     </div>
   );
 };
