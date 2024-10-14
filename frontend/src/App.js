@@ -20,6 +20,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} /> 
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/superAdmindashboard/*" element={<Protect Child={SuperAdminDashboard} requiredRole="superadmin" />} />
+          <Route path="/addstudent" element={<AddStudent />} />
           
         </Routes>
         

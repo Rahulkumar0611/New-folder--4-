@@ -59,7 +59,7 @@ const Students = () => {
         </button>
         {dropdownOpen && (
           <div className="dropdown-content">
-            <Link to="addstudent" className="dropdown-item">Individual Registration</Link>
+            <Link to="/addstudent" className="dropdown-item">Individual Registration</Link>
             <Link to="bulkadmission" className="dropdown-item">Bulk Admission</Link>
           </div>
         )}
