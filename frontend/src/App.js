@@ -7,6 +7,7 @@ import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import SuperAdminDashboard from './components/SuperAdminDashboard';
 import Protect from './components/Protect';
+import AddStudent from './components/AddStudent';
 
 function App() {
   return (
@@ -19,7 +20,9 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} /> 
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/superAdmindashboard/*" element={<Protect Child={SuperAdminDashboard} requiredRole="superadmin" />} />
+          
         </Routes>
+        
       </Router>
     </div>
   );

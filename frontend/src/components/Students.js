@@ -4,14 +4,13 @@ import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
 import StudentDetailsModal from './StudentDetailsModal';
 import SearchIcon from '@mui/icons-material/Search';
-import { Link } from 'react-router-dom';
-
+import { Link , useNavigate} from 'react-router-dom';
 const Students = () => {
   const [students, setStudents] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false); // State for dropdown visibility
-
+  const navigate = useNavigate(); 
   // Fetch the student data
   useEffect(() => {
     axios
@@ -32,14 +31,11 @@ const Students = () => {
     (student.Phone && student.Phone.toString().includes(searchQuery))
   );
 
-  const handleViewClick = (student) => {
-    localStorage.setItem('selectedStudent', JSON.stringify(student));
-    setSelectedStudent(student);
+
+  const handleViewEdit = (studentId) => {
+    navigate(`viewandedit/${studentId}`); // Programmatically navigate to student details
   };
 
-  const handleCloseModal = () => {
-    setSelectedStudent(null);
-  };
 
 
   return (
@@ -90,8 +86,8 @@ const Students = () => {
                 <td>{student.Class}</td>
                 <td>{student.Phone}</td>
                 <td>
-                  <button onClick={() => handleViewClick(student)} className="view-button56">
-                    View
+                <button className="view-button56" onClick={() => handleViewEdit(student._id)}>
+                    View / Edit
                   </button>
                 </td>
               </tr>
@@ -99,12 +95,7 @@ const Students = () => {
           </tbody>
         </table>
 
-        {selectedStudent && (
-          <StudentDetailsModal
-            student={selectedStudent}
-            onClose={handleCloseModal}
-          />
-        )}
+       
         </div>
       </div>
   

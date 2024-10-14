@@ -17,9 +17,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 55px;
   background-color: #004d99;
   color: #fff;
-  padding: 7px 30px;
+  padding: 7px 10px;
   width: 100%;
   position: fixed;
   top: 0;
@@ -29,13 +30,14 @@
 
 /* Title centered in the top navbar */
 .title {
- margin-left: 100px;
+ /* margin-left: 100px; */
+ margin-top: 5px;
    position: relative;
   font-size: 1.8rem;
   font-weight: bold;
   flex: 1;
   text-align: center;
-  margin-right: 60px; /* Adjust margin to avoid overlapping with the settings button */
+   /* Adjust margin to avoid overlapping with the settings button */
 }
 
 /* Settings button styles */
@@ -88,14 +90,14 @@
 .sidebar {
   background-color: #003366;
   color: #fff;
-  width: 270px;
-  padding-top: 80px; /* Adds spacing to account for fixed navbar */
+  width: 250px;
+  padding-top: 50px; /* Adds spacing to account for fixed navbar */
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   overflow-y: auto;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 
 }
 
@@ -107,7 +109,7 @@
 
 .sidebar li {
   margin-top: 10px;
-  padding: 14px 20px;
+  padding: 6px 24px;
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease;
@@ -120,8 +122,8 @@
 .sidebar li a {
   margin-left: 0.3rem;
   padding-left: 15px;
-  padding-top: 13px;
-  padding-bottom: 13px;
+  padding-top: 7px;
+  padding-bottom: 8px;
   text-decoration: none;
   color: #fff;
   display: block;
@@ -136,7 +138,7 @@
 /* Main content styles */
 .mainContent {
   margin-left: 270px;
-  padding: 100px 30px 30px;
+  padding: 80px 30px 30px;
   width: calc(100% - 270px);
   min-height: 100vh;
   background-color: #fff;

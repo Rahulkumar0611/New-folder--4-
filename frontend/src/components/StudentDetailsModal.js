@@ -38,18 +38,12 @@ const StudentDetailsModal = ({ student, onClose }) => {
     <div className="modal1">
       <div className="modal-content1">
         <span className="close-button" onClick={onClose}>&times;</span>
-        <h2>Student Details</h2>
-        <p><strong>ID:</strong> {student._id}</p>
-        <p><strong>First Name:</strong> {student.Firstname}</p>
-        <p><strong>Middle Name:</strong> {student.Middlename || 'N/A'}</p>
-        <p><strong>Last Name:</strong> {student.Lastname}</p>
-        <p><strong>Class:</strong> {student.Class}</p>
-        <p><strong>Father's Name:</strong> {student.Fathersname}</p>
-        <p><strong>Mother's Name:</strong> {student.Mothersname}</p>
-        <p><strong>Phone:</strong> {student.Phone}</p>
-        <p><strong>Alternate Phone:</strong> {student.AlternatePhone}</p>
-        <p><strong>Address:</strong> {student.Address}</p>
-
+        
+        <h1>Student Details for {student.Firstname}</h1>
+      <p>ID: {student._id}</p>
+      <p>Name: {student.Firstname}</p>
+      <p>Class: {student.Class}</p>
+      <p>Phone: {student.Phone}</p>
         {/* Buttons for Update, Delete, and Close */}
         <div className="modal-actions">
           <button onClick={handleUpdate} className="update-button">Update</button>

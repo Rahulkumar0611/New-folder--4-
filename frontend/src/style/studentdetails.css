@@ -10,6 +10,12 @@
   overflow: auto;
   text-align: center;
 }
+.add-student-button{
+  color: rgb(241, 235, 222);
+  background-color: #007BFF;
+  padding-right: 70px;
+}
+
 
 .title988 {
   /* margin-top: 130rem; */
@@ -26,9 +32,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* margin-bottom: 8px; */
-  padding: 0 30px;
- 
+  
+  padding: 0 20px;
 }
 
 #searchbar {
@@ -66,26 +71,22 @@
 #search:hover {
   background-color: #45a049;
 }
-.dropdown button{
- 
-}
+
 /* Add Student Dropdown */
 .add-student-button {
-  /* display: flex;
+  display: flex;
   align-items: center;
-  background-color: #007BFF; */
-  /* color: white;
+  background-color: #007BFF;
+  color: white;
   padding: 10px 20px;
   font-size: 16px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease; */
+  transition: background-color 0.3s ease;
   /* margin-right: 25px; */
 }
-.add-student-button{
-  background-color: #333;
-}
+
 .add-student-button:hover {
   background-color: #0056b3;
 }
@@ -192,7 +193,7 @@ button:active {
 }
 
 .view-button {
-  /* background-color: #007BFF; */
+  background-color: #007BFF;
 }
 
 .view-button:hover {

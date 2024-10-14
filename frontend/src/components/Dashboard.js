@@ -98,10 +98,10 @@ const Dashboard = () => {
           <li><Link to="/dashboard/students">Student Details</Link></li>
           <li><Link to="/dashboard/staff">Staff Info</Link></li>
           <li><Link to="/dashboard/payments">Payment Details</Link></li>
-          <li><Link to="/dashboard/incomeandexpenditures">Income and Expenditures</Link></li>
+          <li><Link to="/dashboard/incomeandexpenditures"> Expenditures</Link></li>
           <li><Link to="/dashboard/CourseFee">Course Fee Details</Link></li>
           <li><Link to="/dashboard/reports">Reports</Link></li>
-          <li><Link to="/dashboard/reimbursementdetails">Reimbursement Details</Link></li>
+          <li><Link to="/dashboard/reimbursementdetails">Reimbursement </Link></li>
         </ul>
       </div>
 
@@ -115,8 +115,8 @@ const Dashboard = () => {
           <Route path="reports" element={<PaymentReports />} />
           <Route path="staff" element={<StaffDetails/>}/>
           <Route path="incomeandexpenditures" element={<IncomeAndExpenditure/>}/>
-          <Route path="students/addstudent" element={<AddStudent />} />
-          <Route path="students/viewstudent" element={<StudentDetailsModal />} />
+          {/* <Route path="/students/addstudent" element={<AddStudent />} /> */}
+          {/* <Route path="students/viewstudent" element={<StudentDetailsModal />} /> */}
           <Route path="CourseFee" element={<CourseFee />} />
           <Route path="reimbursementdetails/" element={<StaffManagement />} />
           <Route path="AddReimbursementDetails" element={<AddReimbursementDetails />} />
@@ -126,6 +126,10 @@ const Dashboard = () => {
           <Route path="/staff/addstaff" element={<Addstaff/>}/>
           <Route path="/staff/viewstaff" element={<ViewStaff/>}/>
           <Route path="change-password" element={<ChangePassword/>}/>
+          <Route path="/viewandedit/:studentId" element={<StudentDetailsModal />} />
+          
+         
+
         </Routes>
       </div>
     </div>
