@@ -78,9 +78,25 @@ router.post('/login', async (req, res) => {
 // create Student data
 router.post('/addStudent', async (req, res) => {
   try {
-    const { _id, Firstname, Middlename,Lastname, Class, Section, Fathersname, Mothersname, Phone, AlternatePhone,AadhaarNumber,Gender, Address } = req.body;
+    const { _id, studentName, dob, address, city, state, class: studentClass, section, gender, email, phone, aadhaarNumber, emergencyNumber, studentImage } = req.body;
 
-    const newStudent = new Student({ _id, Firstname, Middlename,Lastname, Class, Section, Fathersname, Mothersname, Phone, AlternatePhone,AadhaarNumber,Gender, Address })
+    const newStudent = new Student({
+      _id,
+      studentName,
+      dob,
+      address,
+      city,
+      state,
+      class: studentClass,
+      section,
+      gender,
+      email,
+      phone,
+      aadhaarNumber,
+      emergencyNumber,
+      studentImage
+    });
+
     await newStudent.save();
 
     res.status(201).json({ message: 'Student Added' });
@@ -88,6 +104,7 @@ router.post('/addStudent', async (req, res) => {
     res.status(500).json({ message: 'Error Adding Student', error });
   }
 });
+
 // for bulk import
 router.post('/addStudentbulk', async (req, res) => {
   try {
