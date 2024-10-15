@@ -1,7 +1,8 @@
-import style from "../style/addstudent.css"
+import  "../style/AddIndividualstudent.css"
 import { useState } from "react";
-const AddStudent = () => {
-
+import { useNavigate } from "react-router-dom";
+const AddIndividualStudent = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     id: '',
     studentName: '',
@@ -17,6 +18,12 @@ const AddStudent = () => {
     emergencyNumber: '',
   });
 
+  
+
+  const handleImageClick = () => {
+   
+    navigate("/dashboard/students"); // This will navigate to the 'student.js' page
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -33,8 +40,10 @@ const AddStudent = () => {
     return (
       <div>
       <div className="main">
-        <h2>Create Student</h2>
-         <img src="https://img.icons8.com/?size=100&id=13903&format=png&color=000000"></img>
+        <h5>Create Student</h5>
+         <img src="https://img.icons8.com/?size=100&id=13903&format=png&color=000000"
+          onClick={handleImageClick}
+         />
          
       </div>
       <div className="content"> 
@@ -54,7 +63,7 @@ const AddStudent = () => {
         </div>
         <div className="form-group">
           <label>Address</label>
-          <input type="text" name="address" value={formData.address} onChange={handleChange} />
+          <input type="text" name="address" id="address" value={formData.address} onChange={handleChange} />
         </div>
         <div className="form-group">
           <label>Class</label>
@@ -72,6 +81,7 @@ const AddStudent = () => {
       </div>
 
       <div className="form-column">
+
       <div className="form-group">
           <label>State</label>
           <input type="text" name="taxStatus" value={formData.taxStatus} onChange={handleChange} />
@@ -128,5 +138,5 @@ const AddStudent = () => {
       </div>
     );
   };
-  export default AddStudent;
+  export default AddIndividualStudent;
   

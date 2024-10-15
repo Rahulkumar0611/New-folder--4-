@@ -57,7 +57,7 @@ const LandingPage = () => {
 
   return (
     <div className={styles.AdminLogin}>
-      <Form onSubmit={verifyAdmin}>
+      <Form id='landingform'  onSubmit={verifyAdmin}>
         <h6>Please enter your details</h6>
         <h1 className={styles.heading}>Welcome Back</h1>
         
@@ -108,10 +108,11 @@ const LandingPage = () => {
         <div className={styles.btnWrapper}>
           <button type="submit" className={styles.btn}>Sign In</button>
         </div>
-      </Form>
-      <footer className={styles.footer}>
+        <footer className={styles.footer}>
         <p>Forgot your password? <Link to="/forgot-password">Reset it here</Link></p>
       </footer>
+      </Form>
+      
     </div>
   );
 };

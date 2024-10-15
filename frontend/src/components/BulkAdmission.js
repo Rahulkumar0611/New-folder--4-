@@ -55,31 +55,35 @@ const BulkAdmission = () => {
   };
 
   return (
-    <div className="container">
-      <form className="form">
-        <h1 className="title">Bulk Student Registration</h1>
+    <div className="BulkAdmission">
+      <form className="formBulkAdmission">
+        <h2 className="titleBulk">Bulk Student Registration</h2>
+        <div className='mainBulk'>
+          <div className="groupforBulk">
+            <label className="labelforBulk">Bulk upload of student details</label>
 
-        <div className="group">
-          <label className="label">Bulk upload of student details</label>
-          
-          <button type="button" className="button" onClick={downloadTemplate}>
-            Download Template
-          </button>
+            <button type="button" className="buttonforBulk" onClick={downloadTemplate}>
+              Download Template
+            </button>
+          </div>
+          <div className="vertical-line"></div>
 
-          <input 
-            type="file" 
-            accept=".xlsx, .xls" 
-            onChange={handleFileChange} 
-            className="button"
-          />
+          <div className='Bulkdiv2'>
+            <input
+              type="file"
+              accept=".xlsx, .xls"
+              onChange={handleFileChange}
+              className="filesimport"
+            />
 
-          <button 
-            type="button" 
-            className="button" 
-            onClick={importExcel}
-          >
-            Import & Save
-          </button>
+            <button
+              type="button"
+              className="buttonforbulk"
+              onClick={importExcel}
+            >
+              Import & Save
+            </button>
+          </div>
         </div>
       </form>
     </div>

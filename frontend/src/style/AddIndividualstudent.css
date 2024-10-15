@@ -1,0 +1,112 @@
+.main{
+   
+    width: 100%;
+    height: 7vh;
+    background-color: rgb(65, 197, 135);
+
+}
+.main{   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.main h5{
+    padding-left: 20px;
+    color: rgb(255, 255, 255);
+    font-family:cursive;
+}
+.main img{
+    height: 55px;
+    width: 54px;
+}
+.main img:hover{
+ cursor: pointer;
+}
+
+form select{
+    width: 90%;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.student-form {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+    margin-left: 30px;
+
+  }
+  
+  .form-column {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    
+  }
+  
+  .form-group {
+    margin-bottom: 12px;
+  }
+  #address{
+    padding-top: 23px;
+    padding-bottom: 23px;
+  }
+ 
+  .form-group label {
+    font-size: 15px;
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 500;
+    color: rgb(73, 69, 69);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .form-group input {
+    width: 90%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .form-image{
+    display: flex;
+    flex-direction: column;
+  }
+.form-column img {
+    width: 150px; /* Set fixed width */
+    height: 150px; /* Set fixed height */
+    border-radius: 4px;
+    object-fit: cover; /* Ensures the image covers the defined area without distortion */
+}
+.imagedivj img{
+    
+    width: 120px; /* Set fixed width */
+    height: 120px; /* Set fixed height */
+    border: 1px dotted rgb(85, 79, 79);
+    
+
+}
+
+  .form-Button button {
+    font-size: 15px;
+   margin-top: 20px;
+    padding: 10px 178px;
+    background-color:#ce70df;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  .form-column label{
+    font-weight: 500;
+    color: rgb(73, 69, 69);
+    font-family: Arial, Helvetica, sans-serif;
+   
+
+  }

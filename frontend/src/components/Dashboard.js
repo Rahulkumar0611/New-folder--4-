@@ -4,7 +4,6 @@ import style from '../style/Dashboard.module.css';
 import Students from './Students'; 
 import Payments from './Payments';
 import PaymentReports from './PaymentReports';
-import AddStudent from './AddStudent';
 import StudentDetailsModal from './StudentDetailsModal';
 import CourseFee from './CourseFee';
 import Dashboard1 from './Dashboard1';
@@ -127,7 +126,7 @@ const Dashboard = () => {
           <Route path="/staff/viewstaff" element={<ViewStaff/>}/>
           <Route path="change-password" element={<ChangePassword/>}/>
           <Route path="/viewandedit/:studentId" element={<StudentDetailsModal />} />
-          
+          <Route path="/student" element={<Students />}/>
          
 
         </Routes>
