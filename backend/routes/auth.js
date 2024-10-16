@@ -7,6 +7,9 @@ const Payment = require('../models/Payment');
 const Student = require('../models/Student');
 const CourseFee = require('../models/CourseFee');
 const Permission=require('../models/Permission');
+const multer = require('multer');
+const path = require('path');
+
 
 const transporter = nodemailer.createTransport(emailConfig);
 
@@ -76,9 +79,24 @@ router.post('/login', async (req, res) => {
 });
 
 // create Student data
-router.post('/addStudent', async (req, res) => {
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // Folder to store images
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname)); // Generate unique filenames
+  }
+});
+
+const upload = multer({ storage: storage });
+
+
+router.post('/addStudent', upload.single('studentImage'), async (req, res) => {
   try {
-    const { _id, studentName, dob, address, city, state, class: studentClass, section, gender, email, phone, aadhaarNumber, emergencyNumber, studentImage } = req.body;
+    const { _id, studentName, dob, address, city, state, class: studentClass, section, gender, email, phone, aadhaarNumber, emergencyNumber } = req.body;
+
+    const imagePath = `/uploads/${req.file.filename}`; // Store image path
 
     const newStudent = new Student({
       _id,
@@ -94,7 +112,7 @@ router.post('/addStudent', async (req, res) => {
       phone,
       aadhaarNumber,
       emergencyNumber,
-      studentImage
+      studentImage: imagePath // Save image path in DB
     });
 
     await newStudent.save();
@@ -104,6 +122,7 @@ router.post('/addStudent', async (req, res) => {
     res.status(500).json({ message: 'Error Adding Student', error });
   }
 });
+
 
 // for bulk import
 router.post('/addStudentbulk', async (req, res) => {

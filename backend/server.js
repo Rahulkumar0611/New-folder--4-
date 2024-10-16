@@ -27,6 +27,8 @@ app.use('/reimbursement',Reimbursementroute)
 app.use('/staff',staffroute)
 app.use('/superadmin',superadminroute)
 app.use('/permission',Permissionroute)
+app.use('/uploads', express.static('uploads'));
+
 
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/schoolBilling',)
