@@ -10,6 +10,7 @@ const Reimbursementroute=require('./routes/Reimbursement.js');
 const staffroute=require('./routes/Staff.js');
 const superadminroute=require('./routes/SuperAdmin.js');
 const Permissionroute=require('./routes/Permission.js')
+const incomeandExpenditureroute=require('./routes/IncomeandExpenditures.js')
 // require('dotenv').config();
 
 
@@ -28,7 +29,7 @@ app.use('/staff',staffroute)
 app.use('/superadmin',superadminroute)
 app.use('/permission',Permissionroute)
 app.use('/uploads', express.static('uploads'));
-
+app.use('/incomeandexpenditure',incomeandExpenditureroute)
 
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/schoolBilling',)
