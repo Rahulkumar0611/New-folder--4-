@@ -1,12 +1,12 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
-const emailConfig = require('../config/email'); 
+const emailConfig = require('../config/email');
 const Admin = require('../models/Admin');
 const Payment = require('../models/Payment');
 const Student = require('../models/Student');
 const CourseFee = require('../models/CourseFee');
-const Permission=require('../models/Permission');
+const Permission = require('../models/Permission');
 const multer = require('multer');
 const path = require('path');
 
@@ -115,17 +115,17 @@ router.post('/addStudent', upload.single('studentImage'), async (req, res) => {
       return res.status(400).json({ message: 'All fields are required' });
     }
 
-    // Validate gender value
+
     if (!['Male', 'Female', 'Other'].includes(gender)) {
       return res.status(400).json({ message: 'Invalid gender value' });
     }
 
-    // Ensure phone is not null or empty
+
     if (!phone) {
       return res.status(400).json({ message: 'Phone number is required' });
     }
 
-    // Validate and sanitize other fields as needed (e.g., trim strings)
+
     const imagePath = `/uploads/${req.file.filename}`; // Store image path
 
     const newStudent = new Student({
@@ -142,7 +142,7 @@ router.post('/addStudent', upload.single('studentImage'), async (req, res) => {
       phone: phone.trim(),
       aadhaarNumber: aadhaarNumber.trim(),
       emergencyNumber: emergencyNumber.trim(),
-      studentImage: imagePath // Save image path in DB
+      studentImage: imagePath
     });
 
     await newStudent.save();
@@ -150,7 +150,7 @@ router.post('/addStudent', upload.single('studentImage'), async (req, res) => {
     res.status(201).json({ message: 'Student Added' });
   } catch (error) {
     if (error.code === 11000) {
-      // Handle duplicate key errors (e.g., phone, email, aadhaarNumber)
+
       const duplicateField = Object.keys(error.keyPattern)[0];
       res.status(409).json({ message: `Duplicate value for ${duplicateField}` });
     } else {
@@ -300,7 +300,7 @@ router.post('/create-admin', async (req, res) => {
       subject: 'Welcome to the School-Billing System',
       text: `Welcome! Here are your login credentials:\n\nEmail: ${email}\nPassword: ${initialPassword}\n\nPlease log in and change your password as soon as possible.`,
     };
-    
+
 
     await transporter.sendMail(mailOptions);
     console.log('Email sent successfully.');
