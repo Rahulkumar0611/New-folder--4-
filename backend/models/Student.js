@@ -14,7 +14,7 @@ const studentSchema = new mongoose.Schema({
   phone: { type: String, required: true, unique: true },
   aadhaarNumber: { type: String, required: true, unique: true },
   emergencyNumber: { type: String, required: true },
-  studentImage: { type: String, required: true }
+  studentImage: { type: String,}
 }, { versionKey: false });
 
 module.exports = mongoose.model('Student', studentSchema);

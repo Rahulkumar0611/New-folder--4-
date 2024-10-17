@@ -9,7 +9,7 @@ const BulkAdmission = () => {
   // Function to download the Excel template
   const downloadTemplate = () => {
     const data = [
-      ['_id', 'Firstname', 'Middlename', 'Lastname', 'Class', 'Section', 'Fathersname', 'Mothersname', 'Phone', 'AlternatePhone', 'Address']
+      ['_id', 'studentName', 'dob', 'address', 'city', 'state', 'class', 'section', 'gender', 'email', 'phone', 'aadhaarNumber', 'emergencyNumber']
     ];
 
     const ws = XLSX.utils.aoa_to_sheet(data); // Create a worksheet from data array

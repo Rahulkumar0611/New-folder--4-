@@ -74,7 +74,7 @@ const Students = () => {
               <th>ID</th>
               <th id='th2'>Name</th>
               <th>Class</th>
-              <th id='th4'>Phone</th>
+              <th id='th4'>Section</th>
               <th id='th5'>Actions</th>
             </tr>
           </thead>
@@ -82,9 +82,9 @@ const Students = () => {
             {filteredStudents.map((student) => (
               <tr key={student._id}>
                 <td>{student._id}</td>
-                <td>{student.Firstname}</td>
-                <td>{student.Class}</td>
-                <td>{student.Phone}</td>
+                <td>{student.studentName}</td>
+                <td>{student.class}</td>
+                <td>{student.section}</td>
                 <td>
                 <button className="view-button56" onClick={() => handleViewEdit(student._id)}>
                     View / Edit

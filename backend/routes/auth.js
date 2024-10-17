@@ -94,11 +94,7 @@ const upload = multer({ storage: storage });
 
 router.post('/addStudent', upload.single('studentImage'), async (req, res) => {
   try {
-    const { _id, studentName, dob, address, city, state, class: studentClass, section, gender, email, phone, aadhaarNumber, emergencyNumber } = req.body;
-
-    const imagePath = `/uploads/${req.file.filename}`; // Store image path
-
-    const newStudent = new Student({
+    const {
       _id,
       studentName,
       dob,
@@ -111,7 +107,41 @@ router.post('/addStudent', upload.single('studentImage'), async (req, res) => {
       email,
       phone,
       aadhaarNumber,
-      emergencyNumber,
+      emergencyNumber
+    } = req.body;
+
+    // Validate required fields
+    if (!_id || !studentName || !dob || !address || !city || !state || !studentClass || !section || !gender || !email || !phone || !aadhaarNumber || !emergencyNumber) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    // Validate gender value
+    if (!['Male', 'Female', 'Other'].includes(gender)) {
+      return res.status(400).json({ message: 'Invalid gender value' });
+    }
+
+    // Ensure phone is not null or empty
+    if (!phone) {
+      return res.status(400).json({ message: 'Phone number is required' });
+    }
+
+    // Validate and sanitize other fields as needed (e.g., trim strings)
+    const imagePath = `/uploads/${req.file.filename}`; // Store image path
+
+    const newStudent = new Student({
+      _id,
+      studentName,
+      dob,
+      address,
+      city,
+      state,
+      class: studentClass,
+      section,
+      gender: gender.trim(), // Trim to avoid space issues
+      email: email.trim(),
+      phone: phone.trim(),
+      aadhaarNumber: aadhaarNumber.trim(),
+      emergencyNumber: emergencyNumber.trim(),
       studentImage: imagePath // Save image path in DB
     });
 
@@ -119,7 +149,13 @@ router.post('/addStudent', upload.single('studentImage'), async (req, res) => {
 
     res.status(201).json({ message: 'Student Added' });
   } catch (error) {
-    res.status(500).json({ message: 'Error Adding Student', error });
+    if (error.code === 11000) {
+      // Handle duplicate key errors (e.g., phone, email, aadhaarNumber)
+      const duplicateField = Object.keys(error.keyPattern)[0];
+      res.status(409).json({ message: `Duplicate value for ${duplicateField}` });
+    } else {
+      res.status(500).json({ message: 'Error Adding Student', error });
+    }
   }
 });
 
