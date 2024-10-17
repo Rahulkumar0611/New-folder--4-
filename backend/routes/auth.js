@@ -91,7 +91,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-
 router.post('/addStudent', upload.single('studentImage'), async (req, res) => {
   try {
     const {
@@ -115,18 +114,20 @@ router.post('/addStudent', upload.single('studentImage'), async (req, res) => {
       return res.status(400).json({ message: 'All fields are required' });
     }
 
-
     if (!['Male', 'Female', 'Other'].includes(gender)) {
       return res.status(400).json({ message: 'Invalid gender value' });
     }
 
+    const imagePath = req.file ? `/uploads/${req.file.filename}` : null; // Store image path
 
-    if (!phone) {
-      return res.status(400).json({ message: 'Phone number is required' });
+    // Check for existing phone number, email, and Aadhaar number
+    const existingStudent = await Student.findOne({ 
+      $or: [{ phone }, { email }, { aadhaarNumber }]
+    });
+
+    if (existingStudent) {
+      return res.status(409).json({ message: 'Duplicate entry detected for phone, email, or Aadhaar number' });
     }
-
-
-    const imagePath = `/uploads/${req.file.filename}`; // Store image path
 
     const newStudent = new Student({
       _id,
@@ -137,7 +138,7 @@ router.post('/addStudent', upload.single('studentImage'), async (req, res) => {
       state,
       class: studentClass,
       section,
-      gender: gender.trim(), // Trim to avoid space issues
+      gender: gender.trim(),
       email: email.trim(),
       phone: phone.trim(),
       aadhaarNumber: aadhaarNumber.trim(),
@@ -150,7 +151,6 @@ router.post('/addStudent', upload.single('studentImage'), async (req, res) => {
     res.status(201).json({ message: 'Student Added' });
   } catch (error) {
     if (error.code === 11000) {
-
       const duplicateField = Object.keys(error.keyPattern)[0];
       res.status(409).json({ message: `Duplicate value for ${duplicateField}` });
     } else {

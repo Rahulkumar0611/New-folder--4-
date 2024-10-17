@@ -1,6 +1,7 @@
 import "../style/AddIndividualstudent.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const AddIndividualStudent = () => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const AddIndividualStudent = () => {
   });
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
+  const [error, setError] = useState("");
 
   const handleImageClick = () => {
     navigate("/dashboard/students");
@@ -41,11 +43,36 @@ const AddIndividualStudent = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You can submit the image file along with formData to the server here
-    console.log("Form Submitted:", formData);
-    console.log("Selected Image:", image);
+    
+    try {
+      // Create a FormData object to submit data and image
+      const data = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        data.append(key, value);
+      });
+      if (image) {
+        data.append("studentImage", image); // Append the image to FormData
+      }
+
+      // Submit the form data to the server
+      const response = await axios.post('http://localhost:5000/auth/addStudent', data);
+      console.log("Student added successfully:", response.data);
+      navigate("/dashboard/students"); // Redirect after success
+    } catch (err) {
+      if (err.response) {
+        // Check for duplicate entry errors
+        if (err.response.data.error) {
+          setError(err.response.data.error);
+        } else {
+          setError("An error occurred while adding the student. Please try again.");
+        }
+      } else {
+        setError("Network error. Please check your connection.");
+      }
+      console.error("Error adding student:", err);
+    }
   };
 
   return (
@@ -59,6 +86,7 @@ const AddIndividualStudent = () => {
         />
       </div>
       <div className="content">
+        {error && <div className="error-message">{error}</div>} {/* Display error message */}
         <form onSubmit={handleSubmit} className="student-form">
           <div className="form-column">
             <div className="form-group">
@@ -114,7 +142,7 @@ const AddIndividualStudent = () => {
               <input type="tel" name="phone" value={formData.phone} onChange={handleChange} />
             </div>
             <div className="form-group">
-              <label>Aadhar No</label>
+              <label>Aadhaar No</label>
               <input type="text" name="aadhar" value={formData.aadhar} onChange={handleChange} />
             </div>
             <div className="form-group">
