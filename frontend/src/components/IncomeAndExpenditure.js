@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const IncomeAndExpenditure = () => {
     const [entries, setEntries] = useState([]);
+    const navigate = useNavigate(); // useNavigate hook for navigation
 
     // Fetch the entries from the backend
     useEffect(() => {
@@ -19,13 +20,25 @@ const IncomeAndExpenditure = () => {
         fetchEntries();
     }, []);
 
+    // Handle navigation when dropdown changes
+    const handleNavigation = (event) => {
+        const path = event.target.value;
+        if (path) {
+            navigate(path); // Navigate to the selected route
+        }
+    };
+
     return (
         <div className="container">
             <h2>Income and Expenditure</h2>
 
+            {/* Dropdown for navigation */}
             <div>
-                <Link to="/individual">Add Individual Entry</Link> | 
-                <Link to="/bulk">Add Bulk Entries</Link>
+                <select onChange={handleNavigation}>
+                    <option value="">-- Select Entry Type --</option>
+                    <option value="/individual">Add Individual Entry</option>
+                    <option value="/bulk">Add Bulk Entries</option>
+                </select>
             </div>
 
             {/* Display income and expenditure data */}

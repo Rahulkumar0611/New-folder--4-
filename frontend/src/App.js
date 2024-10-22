@@ -8,6 +8,8 @@ import ResetPassword from './components/ResetPassword';
 import SuperAdminDashboard from './components/SuperAdminDashboard';
 import Protect from './components/Protect';
 import AddIndividualStudent from './components/AddIndividualStudent';
+import IndividualEntry from './components/IndividualEntry';
+import BulkEntry from './components/BulkEntry';
 
 function App() {
   return (
@@ -21,7 +23,8 @@ function App() {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/superAdmindashboard/*" element={<Protect Child={SuperAdminDashboard} requiredRole="superadmin" />} />
           <Route path="/addstudent" element={<AddIndividualStudent />} />
-          
+          <Route path="/individual" element={<IndividualEntry/>}/>
+          <Route path="/bulk" element={<BulkEntry/>}/>
         </Routes>
         
       </Router>
