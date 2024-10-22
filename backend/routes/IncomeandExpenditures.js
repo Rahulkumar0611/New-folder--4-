@@ -48,5 +48,21 @@ router.get('/get', async (req, res) => {
         });
     }
 });
+// Bulk entry for income and expenditure
+router.post('/bulk-upload', async (req, res) => {
+    try {
+      const entries = req.body; // Expecting an array of entries
+  
+      // Use insertMany for bulk insertion
+      await incomeandExpenditure.insertMany(entries);
+  
+      res.status(201).json({ message: 'Entries Added Successfully', data: entries });
+    } catch (error) {
+      console.error('Error adding entries:', error); // Log the error
+      res.status(500).json({ message: 'Error Adding Entries', error });
+    }
+  });
+  
+  
 
 module.exports = router;
