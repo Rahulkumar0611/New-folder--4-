@@ -80,18 +80,8 @@ router.post('/login', async (req, res) => {
 
 // create Student data
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // Folder to store images
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)); // Generate unique filenames
-  }
-});
 
-const upload = multer({ storage: storage });
-
-router.post('/addStudent', upload.single('studentImage'), async (req, res) => {
+router.post('/addStudent', async (req, res) => {
   try {
     const {
       _id,
@@ -114,14 +104,13 @@ router.post('/addStudent', upload.single('studentImage'), async (req, res) => {
       return res.status(400).json({ message: 'All fields are required' });
     }
 
+    // Validate gender input
     if (!['Male', 'Female', 'Other'].includes(gender)) {
       return res.status(400).json({ message: 'Invalid gender value' });
     }
 
-    const imagePath = req.file ? `/uploads/${req.file.filename}` : null; // Store image path
-
-    // Check for existing phone number, email, and Aadhaar number
-    const existingStudent = await Student.findOne({ 
+    // Check for existing student based on phone, email, or Aadhaar number
+    const existingStudent = await Student.findOne({
       $or: [{ phone }, { email }, { aadhaarNumber }]
     });
 
@@ -129,6 +118,7 @@ router.post('/addStudent', upload.single('studentImage'), async (req, res) => {
       return res.status(409).json({ message: 'Duplicate entry detected for phone, email, or Aadhaar number' });
     }
 
+    // Create a new student entry
     const newStudent = new Student({
       _id,
       studentName,
@@ -142,22 +132,25 @@ router.post('/addStudent', upload.single('studentImage'), async (req, res) => {
       email: email.trim(),
       phone: phone.trim(),
       aadhaarNumber: aadhaarNumber.trim(),
-      emergencyNumber: emergencyNumber.trim(),
-      studentImage: imagePath
+      emergencyNumber: emergencyNumber.trim()
     });
 
+    // Save the new student record to the database
     await newStudent.save();
 
+    // Success response
     res.status(201).json({ message: 'Student Added' });
   } catch (error) {
     if (error.code === 11000) {
       const duplicateField = Object.keys(error.keyPattern)[0];
       res.status(409).json({ message: `Duplicate value for ${duplicateField}` });
     } else {
+      // General server error response
       res.status(500).json({ message: 'Error Adding Student', error });
     }
   }
 });
+
 
 
 // for bulk import
