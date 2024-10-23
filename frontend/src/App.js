@@ -11,6 +11,7 @@ import AddIndividualStudent from './components/AddIndividualStudent';
 import IndividualEntry from './components/IndividualEntry';
 import BulkEntry from './components/BulkEntry';
 import StudentDetailsModal from './components/StudentDetailsModal';
+import Addstaff from './components/Addstaff';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/viewandedit" element={<StudentDetailsModal />} />
           <Route path="/individual" element={<IndividualEntry/>}/>
           <Route path="/bulk" element={<BulkEntry/>}/>
+          <Route path="/addstaff" element={<Addstaff />} />
         </Routes>
         
       </Router>

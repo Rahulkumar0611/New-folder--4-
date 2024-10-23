@@ -4,9 +4,12 @@ import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
 import StudentDetailsModal from './StudentDetailsModal';
 import SearchIcon from '@mui/icons-material/Search';
+import { useNavigate } from "react-router-dom";
+
 import { Link } from 'react-router-dom';
 
 const StaffDetails = () => {
+  
   const [staff, setStaff] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedStaff, setSelectedStaff] = useState(null);
@@ -60,7 +63,7 @@ const StaffDetails = () => {
         </button>
         {dropdownOpen && (
           <div className="dropdown-content">
-            <Link to="addstaff" className="dropdown-item">Individual Registration</Link>
+            <Link to="/addstaff" className="dropdown-item">Individual Registration</Link>
             <Link to="bulkjoinees" className="dropdown-item">Bulk joinees</Link>
           </div>
         )}
