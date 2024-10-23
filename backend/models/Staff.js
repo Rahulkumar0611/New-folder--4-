@@ -23,19 +23,12 @@ const staffSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  role: {
-    type: String,
-    required: true,
-    enum: ['teacher', 'administrator', 'accountant', 'support'],
-    default: 'teacher'
+  alternatePhone: {
+    type: String
   },
   department: {
     type: String,
     required: true
-  },
-  aadhaarnumber:{
-    type:String,
-    required:true
   },
   address: {
     street: String,

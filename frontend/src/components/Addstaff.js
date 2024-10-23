@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
-import "../style/addstaff.css"
+import "../style/addstaff.css";
 import { useNavigate } from "react-router-dom";
 
-
 const CreateEmployee = () => {
-
   const navigate = useNavigate();
-
   const [currentSection, setCurrentSection] = useState(1);
+
+  // State variables for form fields
+  const [id, setId] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [alternatePhone, setAlternatePhone] = useState('');
+  const [department, setDepartment] = useState('');
+  const [address, setAddress] = useState({
+    street: '',
+    city: '',
+    state: '',
+    zipCode: ''
+  });
 
   const handleNext = () => {
     if (currentSection < 6) {
@@ -25,18 +37,16 @@ const CreateEmployee = () => {
     navigate("/dashboard/staff");
   };
 
-
   return (
     <div className='staffmain'>
       <div className='staffheading'>
-      <h4>Create Employee</h4>
-      <img
+        <h4>Create Employee</h4>
+        <img
           src="https://img.icons8.com/?size=100&id=13903&format=png&color=000000"
           onClick={handleImageClick}
           alt="Student icon"
         />
       </div>
-      
 
       <div className="tabs">
         <button className={currentSection === 1 ? 'active' : ''}>Personal Details</button>
@@ -49,139 +59,134 @@ const CreateEmployee = () => {
 
       {currentSection === 1 && (
         <div className='PersonalDiv'>
-          
           <div className="groupforstaff">
-          <label htmlFor="id" className="label">ID</label>
-          <input
-            type="text"
-           
-            onChange={(e) => setId(e.target.value)}
-            className="inputforstaff"
-            id="id"
-            placeholder="Enter ID"
-            required
-          />
-        </div>
+            <label htmlFor="id" className="label">ID</label>
+            <input
+              type="text"
+              value={id}
+              onChange={(e) => setId(e.target.value)}
+              className="inputforstaff"
+              id="id"
+              placeholder="Enter ID"
+              required
+            />
+          </div>
 
-        <div className="groupforstaff">
-          <label htmlFor="firstName" className="label">First Name</label>
-          <input
-            type="text"        
-            onChange={(e) => setFirstName(e.target.value)}
-            
-            className="inputforstaff"
-            id="firstName"
-            placeholder="First Name"
-            required
-          />
-        </div>
+          <div className="groupforstaff">
+            <label htmlFor="firstName" className="label">First Name</label>
+            <input
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              className="inputforstaff"
+              id="firstName"
+              placeholder="First Name"
+              required
+            />
+          </div>
 
-        <div className="groupforstaff">
-          <label htmlFor="lastName" className="label">Last Name</label>
-          <input
-            type="text"
-            
-            onChange={(e) => setLastName(e.target.value)}
-            className="inputforstaff"
-            id="lastName"
-            placeholder="Last Name"
-            required
-          />
-        </div>
+          <div className="groupforstaff">
+            <label htmlFor="lastName" className="label">Last Name</label>
+            <input
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              className="inputforstaff"
+              id="lastName"
+              placeholder="Last Name"
+              required
+            />
+          </div>
 
-        <div className="groupforstaff">
-          <label htmlFor="email" className="label">Email</label>
-          <input
-            type="email"
-            
-            onChange={(e) => setEmail(e.target.value)}
-            className="inputforstaff"
-            id="email"
-            placeholder="Email"
-            required
-          />
-        </div>
+          <div className="groupforstaff">
+            <label htmlFor="email" className="label">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="inputforstaff"
+              id="email"
+              placeholder="Email"
+              required
+            />
+          </div>
 
-        <div className="groupforstaff">
-          <label htmlFor="phone" className="label">Phone</label>
-          <input
-            type="tel"
-            
-            onChange={(e) => setPhone(e.target.value)}
-            className="inputforstaff"
-            id="phone"
-            placeholder="Phone"
-            required
-          />
-        </div>
+          <div className="groupforstaff">
+            <label htmlFor="phone" className="label">Phone</label>
+            <input
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="inputforstaff"
+              id="phone"
+              placeholder="Phone"
+              required
+            />
+          </div>
 
-        <div className="groupforstaff">
-          <label htmlFor="alternatePhone" className="label">Alternate Phone</label>
-          <input
-            type="tel"
-            
-            onChange={(e) => setAlternatePhone(e.target.value)}
-            className="inputforstaff"
-            id="alternatePhone"
-            placeholder="Alternate Phone"
-          />
-        </div>
+          <div className="groupforstaff">
+            <label htmlFor="alternatePhone" className="label">Alternate Phone</label>
+            <input
+              type="tel"
+              value={alternatePhone}
+              onChange={(e) => setAlternatePhone(e.target.value)}
+              className="inputforstaff"
+              id="alternatePhone"
+              placeholder="Alternate Phone"
+            />
+          </div>
 
-        <div className="groupforstaff">
-          <label htmlFor="department" className="label">Department</label>
-          <input
-            type="text"
-            
-            onChange={(e) => setDepartment(e.target.value)}
-            className="inputforstaff"
-           
-            placeholder="Department"
-            required
-          />
-        </div>
+          <div className="groupforstaff">
+            <label htmlFor="department" className="label">Department</label>
+            <input
+              type="text"
+              value={department}
+              onChange={(e) => setDepartment(e.target.value)}
+              className="inputforstaff"
+              placeholder="Department"
+              required
+            />
+          </div>
 
-        <div className="groupforstaff">
-          <label htmlFor="address" className="label">Address</label>
-          <input
-            type="text"
-            
-            onChange={(e) => setAddress({ ...address, street: e.target.value })}
-            id="address"
-            className="inputforstaff"
-            placeholder="Street"
-            required
-          />
-          <input
-            type="text"
-            
-            onChange={(e) => setAddress({ ...address, city: e.target.value })}
-            placeholder="City"
-            className="inputforstaff"
-            required
-          />
-          <input
-            type="text"
-            
-            onChange={(e) => setAddress({ ...address, state: e.target.value })}
-            placeholder="State"
-            className="inputforstaff"
-            required
-          />
-          <input
-            type="text"
-            
-            onChange={(e) => setAddress({ ...address, zipCode: e.target.value })}
-            placeholder="Zip Code"
-            className="inputforstaff"
-            required
-          />
-        </div>
+          <div className="groupforstaff">
+            <label htmlFor="address" className="label">Address</label>
+            <input
+              type="text"
+              value={address.street}
+              onChange={(e) => setAddress({ ...address, street: e.target.value })}
+              id="address"
+              className="inputforstaff"
+              placeholder="Street"
+              required
+            />
+            <input
+              type="text"
+              value={address.city}
+              onChange={(e) => setAddress({ ...address, city: e.target.value })}
+              placeholder="City"
+              className="inputforstaff"
+              required
+            />
+            <input
+              type="text"
+              value={address.state}
+              onChange={(e) => setAddress({ ...address, state: e.target.value })}
+              placeholder="State"
+              className="inputforstaff"
+              required
+            />
+            <input
+              type="text"
+              value={address.zipCode}
+              onChange={(e) => setAddress({ ...address, zipCode: e.target.value })}
+              placeholder="Zip Code"
+              className="inputforstaff"
+              required
+            />
+          </div>
         </div>
       )}
 
-
-
-      
       {currentSection === 2 && (
         <div>
           <h3>Official Details</h3>

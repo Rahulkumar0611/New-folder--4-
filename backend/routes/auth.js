@@ -7,7 +7,6 @@ const Payment = require('../models/Payment');
 const Student = require('../models/Student');
 const CourseFee = require('../models/CourseFee');
 const Permission = require('../models/Permission');
-const multer = require('multer');
 const path = require('path');
 
 
@@ -99,23 +98,9 @@ router.post('/addStudent', async (req, res) => {
       emergencyNumber
     } = req.body;
 
-    // Validate required fields
-    if (!_id || !studentName || !dob || !address || !city || !state || !studentClass || !section || !gender || !email || !phone || !aadhaarNumber || !emergencyNumber) {
+    // Check if required fields are provided
+    if (!studentName || !dob || !address || !city || !state || !studentClass || !section || !gender || !email || !phone || !aadhaarNumber || !emergencyNumber) {
       return res.status(400).json({ message: 'All fields are required' });
-    }
-
-    // Validate gender input
-    if (!['Male', 'Female', 'Other'].includes(gender)) {
-      return res.status(400).json({ message: 'Invalid gender value' });
-    }
-
-    // Check for existing student based on phone, email, or Aadhaar number
-    const existingStudent = await Student.findOne({
-      $or: [{ phone }, { email }, { aadhaarNumber }]
-    });
-
-    if (existingStudent) {
-      return res.status(409).json({ message: 'Duplicate entry detected for phone, email, or Aadhaar number' });
     }
 
     // Create a new student entry
@@ -142,15 +127,15 @@ router.post('/addStudent', async (req, res) => {
     res.status(201).json({ message: 'Student Added' });
   } catch (error) {
     if (error.code === 11000) {
+      // Handle duplicate key error
       const duplicateField = Object.keys(error.keyPattern)[0];
-      res.status(409).json({ message: `Duplicate value for ${duplicateField}` });
-    } else {
-      // General server error response
-      res.status(500).json({ message: 'Error Adding Student', error });
+      return res.status(409).json({ message: `Duplicate value for ${duplicateField}` });
     }
+
+    // General server error response
+    res.status(500).json({ message: 'Error Adding Student', error });
   }
 });
-
 
 
 // for bulk import
