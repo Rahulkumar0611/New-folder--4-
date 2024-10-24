@@ -50,8 +50,8 @@ router.get('/barGraphData', async (req, res) => {
       const paymentData = await Payments.aggregate([
         {
           $group: {
-            _id: { $month: "$date" }, // Grouping by month from payment date
-            totalRevenue: { $sum: "$amount" }, // Summing up the amount paid
+            _id: { $month: "$paymentDate" }, // Grouping by month from payment date
+            totalRevenue: { $sum: "$amountPaid" }, // Summing up the amount paid
           },
         },
         { $sort: { "_id": 1 } } // Sorting by month
