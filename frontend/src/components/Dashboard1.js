@@ -20,7 +20,6 @@ const Dashboard1 = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Fetch data from the backend API based on the selected category
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -28,6 +27,8 @@ const Dashboard1 = () => {
       try {
         const response = await axios.get(`http://localhost:5000/graph/barGraphData?category=${selectedCategory}`);
         
+        console.log('API Response:', response.data); // Log the response data
+
         if (selectedCategory === 'Student' || selectedCategory === 'Staff') {
           setChartData({
             labels: response.data.labels,

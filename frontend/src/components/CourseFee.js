@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import "../style/coursefee.css"
-
+import "../style/coursefee.css";
 
 const AddCourseFee = () => {
   const [className, setClassName] = useState('');
@@ -39,9 +38,9 @@ const AddCourseFee = () => {
       return;
     }
 
-    const data = { Class: className, fees };
+    const data = { class: className, fees }; // Change Class to class
 
-    axios.post('http://localhost:5000/auth//addCourseFee', data)
+    axios.post('http://localhost:5000/auth/addCourseFee', data)
       .then(() => {
         alert('Course Fee added successfully');
         // Reset the form
@@ -50,6 +49,7 @@ const AddCourseFee = () => {
         setTotalAmount(0);
       })
       .catch((error) => {
+        console.error('Error adding course fee:', error); // Log the error
         alert('Failed to add course fee');
       });
   };

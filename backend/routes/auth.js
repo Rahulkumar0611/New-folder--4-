@@ -356,7 +356,7 @@ router.post('/change-password', async (req, res) => {
 // Course Details
 router.post('/addCourseFee', async (req, res) => {
   try {
-    const { Class, fees } = req.body;
+    const { class: className, fees } = req.body; // Use class instead of Class
 
     // Validate that fees array is not empty
     if (!fees || fees.length === 0) {
@@ -365,7 +365,7 @@ router.post('/addCourseFee', async (req, res) => {
 
     // Create the new CourseFee document
     const newCourseFee = new CourseFee({
-      Class,
+      class: className, // Use class instead of Class
       fees,
     });
 
@@ -377,8 +377,8 @@ router.post('/addCourseFee', async (req, res) => {
     console.error('Error adding course fee:', error);
     res.status(400).json({ error: 'Failed to add course fee.' });
   }
-
 });
+
 router.get('/findByClass', async (req, res) => {
   try {
     const studentClass = req.query.class;
@@ -387,6 +387,7 @@ router.get('/findByClass', async (req, res) => {
       return res.status(400).json({ message: 'Class parameter is required' });
     }
 
+    // Ensure to use the updated field name 'class'
     const courseFees = await CourseFee.findOne({ class: studentClass });
 
     if (!courseFees) {
@@ -399,7 +400,6 @@ router.get('/findByClass', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
 router.get('/permissions/:adminId', async (req, res) => {
   try {
     const permissions = await Permission.findOne({ adminId: req.params.adminId });

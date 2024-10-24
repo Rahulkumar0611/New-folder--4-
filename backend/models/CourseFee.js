@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const CourseFeeSchema = new mongoose.Schema({
-  Class: { type: String, required: true },
+  class: { type: String, required: true },
   fees: [
     {
       feeType: { type: String, required: true },
