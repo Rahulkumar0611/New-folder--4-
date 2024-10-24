@@ -34,14 +34,14 @@ const Students = () => {
       student._id.toLowerCase().includes(searchQuery.toLowerCase()) ||
       student.studentName.toLowerCase().includes(searchQuery.toLowerCase()) || 
       student.class.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      student.section.toLowerCase().includes(searchQuery.toLowerCase()) || // Added section to search criteria
+      student.section.toLowerCase().includes(searchQuery.toLowerCase()) ||
       (student.phone && student.phone.toString().includes(searchQuery))
     )
   );
 
   const handleViewEdit = (studentId) => {
     localStorage.setItem('selectedStudent', JSON.stringify(students));
-    navigate(`/viewandedit`); // Programmatically navigate to student details
+    navigate(`/viewandedit`); 
   };
 
   return (
