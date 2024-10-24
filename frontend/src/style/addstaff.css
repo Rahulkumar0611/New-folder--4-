@@ -1,4 +1,37 @@
-/* Container styles */
+.detail-container{
+  display: flex;
+  
+
+}
+.other-detail{
+  margin-left: 39px;
+}
+.other-detail select{
+  width: 67vh;
+  height: 34px;
+ padding-top: 3px;
+}
+.other-detail input{
+  width: 67vh;
+  height: 34px;
+}
+.div1Details{
+  margin-left: 40px ;
+  margin-right: 60px;
+}
+.form-detail input{
+  width: 67vh;
+  height: 34px;
+
+}
+.form-detail select{
+  width: 67vh;
+  height: 34px;
+  font-size: 15px;
+  padding-top: 2px;
+  
+}
+
 .tabs {
   display: flex;
   justify-content: space-around;
@@ -8,7 +41,11 @@
   align-items: center;
   
 }
+.details{
+  display: flex;
+  justify-content: space-around;
 
+}
 .staffheading {
   display: flex;
   justify-content: flex-start; /* Align the h4 to the left */
@@ -125,4 +162,13 @@ button:hover:not(:disabled) {
 
 button:focus {
   outline: none;
+}
+.btndetail{
+  display: flex;
+  justify-content:flex-start;
+  margin-left: 35px;
+  
+}
+.div1Details .form-detail label{
+  margin-bottom: 2px;
 }
